@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- MuPDF Resources -->
+	<color name="canvas">#404040</color>
+	<color name="toolbar">#C0000000</color>
+	<color name="page_indicator">#C0202020</color>
+	<color name="busy_indicator">#C0202020</color>
+	<color name="button_normal">#00000000</color>
+	<color name="button_pressed">#FF2572AC</color>
+	<color name="text_normal">#FFFFFF</color>
+	<color name="text_pressed">#FFFFFF</color>
+	<color name="text_border_normal">#000000</color>
+	<color name="text_border_pressed">#2572AC</color>
+	<color name="text_border_focused">#000000</color>
+	<color name="seek_thumb">#2572AC</color>
+	<color name="seek_progress">#FFFFFF</color>
+    <color name="md__transparent">#00000000</color>
+
+    <color name="actionbar_bg">#a01e5a</color>
+
+    <!-- Buttons -->
+    <color name="btn_bg_gradient_end">#3a3537</color>
+    <color name="btn_bg_gradient_start">#2e292b</color>
+    <color name="btn_login">#cc3d85</color>
+    <color name="btn_offline">#9a66ff</color>
+    <color name="btn_disabled">#4b414f</color>
+    <color name="btn_text">#252026</color>
+
+    <!-- Login -->
+    <color name="login_bg">#292526</color>
+    <color name="text_field">#e4e3e4</color>
+
+    <!-- Catalog -->
+    <color name="catalog_bg">#292526</color>
+    <color name="catalog_primary_text">#e4e3e4</color>
+    <color name="catalog_secondary_text">#4b414f</color>
+    <color name="catalog_active_text_1">#cc3d85</color>
+    <color name="catalog_active_text_2">#9a66ff</color>
+
+</resources>

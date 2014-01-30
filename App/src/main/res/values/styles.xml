@@ -1,0 +1,7 @@
+<resources>
+
+    <style name="EditTextLoginTheme" parent="android:Widget.EditText">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+</resources>

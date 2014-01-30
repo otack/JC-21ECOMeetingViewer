@@ -1,0 +1,63 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.7.+'
+    }
+}
+apply plugin: 'android'
+
+repositories {
+    mavenCentral()
+}
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion '19.0.1'
+
+    defaultConfig {
+        minSdkVersion 7
+        targetSdkVersion 19
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+    buildTypes {
+        release {
+            runProguard false
+            proguardFile getDefaultProguardFile('proguard-android.txt')
+        }
+    }
+    productFlavors {
+        defaultFlavor {
+            proguardFile 'proguard-rules.txt'
+        }
+    }
+//    task copyNativeLibs(type: Copy) {
+//        from('libs') { include '**/*.so' }
+//        into new File(buildDir, 'native-libs')
+//    }
+//    tasks.withType(Compile) { compileTask -> compileTask.dependsOn copyNativeLibs }
+
+
+    tasks.withType(com.android.build.gradle.tasks.PackageApplication) { pkgTask ->
+        pkgTask.jniFolders = new HashSet<File>()
+        pkgTask.jniFolders.add(new File(projectDir, 'libs'))
+    }
+
+
+//    clean.dependsOn 'cleanCopyNativeLibs'
+}
+
+dependencies {
+//    compile fileTree(dir: 'libs', include: '*.jar')
+//    compile fileTree(dir: 'libs', include: '**/*.so')
+    compile 'com.android.support:support-v4:19.0.+'
+    compile 'com.android.support:appcompat-v7:19.0.+'
+//    compile 'net.simonvt.menudrawer:menudrawer:3.0.4@aar'
+//    compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
+//    compile 'com.actionbarsherlock:actionbarsherlock-i18n:4.4.0@aar'
+}

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/activity_login_bg">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dummy"
+        android:id="@+id/buttonLoginUri"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:gravity="center">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/editTextId"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/text_field"
+            android:background="@drawable/edit_text_login" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/editTextPassword"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/text_field"
+            android:background="@drawable/edit_text_login"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp">
+
+            <Button
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="0dp"
+                android:text="@string/login_offline"
+                android:id="@+id/buttonOffline"
+                android:textColor="@color/btn_offline_text"
+                android:background="@drawable/btn_offline" />
+
+            <Button
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="0dp"
+                android:text="@string/login"
+                android:id="@+id/buttonLogin"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/btn_login_text"
+                android:background="@drawable/btn_login" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
