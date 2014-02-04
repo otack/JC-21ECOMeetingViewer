@@ -9,10 +9,12 @@
     <string name="cancel">キャンセル</string>
     <string name="reset_uri">初期値に戻す</string>
 
+    <string name="ic_file"></string>
+
     <string name="login">ログイン</string>
     <string name="login_offline">オフラインモード</string>
     <string name="login_uri">ログインURI</string>
-    <string name="id">ID</string>
+    <string name="id">ログインID</string>
     <string name="password">パスワード</string>
     <string name="logging_in">ログイン中…</string>
     <string name="uri_could_not_be_empty">URIは空白にはできません。</string>

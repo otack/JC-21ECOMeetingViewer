@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape
+            android:shape="rectangle">
+            <corners
+                android:radius="@dimen/btn_emboss_radius" />
+            <gradient
+                android:angle="90"
+                android:endColor="@color/btn_emboss_gradient_end"
+                android:startColor="@color/btn_emboss_gradient_start"
+                android:type="linear" />
+        </shape>
+    </item>
+    <item
+        android:left="@dimen/btn_emboss_width"
+        android:top="@dimen/btn_emboss_width"
+        android:right="@dimen/btn_emboss_width"
+        android:bottom="@dimen/btn_emboss_width">
+        <shape
+            android:shape="rectangle">
+            <corners
+                android:radius="@dimen/btn_radius" />
+            <gradient
+                android:angle="90"
+                android:endColor="@color/btn_bg_gradient_end"
+                android:startColor="@color/btn_bg_gradient_start"
+                android:type="linear" />
+            <padding
+                android:top="@dimen/btn_padding"
+                android:bottom="@dimen/btn_padding" />
+            <stroke
+                android:width="@dimen/btn_shadow_width"
+                android:color="@color/btn_shadow" />
+        </shape>
+    </item>
+</layer-list>
+
+<!--<corners-->
+<!--android:radius="@dimen/btn_radius" />-->
+<!--<gradient-->
+<!--android:angle="90"-->
+<!--android:endColor="@color/btn_bg_gradient_end"-->
+<!--android:startColor="@color/btn_bg_gradient_start"-->
+<!--android:type="linear" />-->
+<!--<stroke-->
+<!--android:width="@dimen/btn_stroke_width"-->
+<!--android:color="@color/btn_login" />-->

@@ -19,19 +19,24 @@
     <color name="actionbar_bg">#a01e5a</color>
 
     <!-- Buttons -->
-    <color name="btn_bg_gradient_end">#3a3537</color>
-    <color name="btn_bg_gradient_start">#2e292b</color>
+    <color name="btn_bg_gradient_end">#2c262e</color>
+    <color name="btn_bg_gradient_start">#272129</color>
     <color name="btn_login">#cc3d85</color>
     <color name="btn_offline">#9a66ff</color>
     <color name="btn_disabled">#4b414f</color>
     <color name="btn_text">#252026</color>
+    <color name="btn_shadow">#66251f26</color>
+    <color name="btn_emboss_gradient_end">#272129</color>
+    <color name="btn_emboss_gradient_start">#2c252e</color>
 
     <!-- Login -->
-    <color name="login_bg">#292526</color>
+    <color name="login_bg">#29232b</color>
     <color name="text_field">#e4e3e4</color>
+    <color name="text_field_hint">#4b414f</color>
 
     <!-- Catalog -->
-    <color name="catalog_bg">#292526</color>
+    <color name="catalog_bg">#252026</color>
+    <color name="catalog_item_bg">#2f2930</color>
     <color name="catalog_primary_text">#e4e3e4</color>
     <color name="catalog_secondary_text">#4b414f</color>
     <color name="catalog_active_text_1">#cc3d85</color>

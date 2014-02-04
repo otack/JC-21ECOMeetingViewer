@@ -20,6 +20,14 @@
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:gravity="center">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:id="@+id/imageView"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/logo" />
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,7 +36,9 @@
             android:id="@+id/editTextId"
             android:layout_gravity="center_horizontal"
             android:textColor="@color/text_field"
-            android:background="@drawable/edit_text_login" />
+            android:background="@drawable/edit_text_login"
+            android:hint="@string/id"
+            android:textColorHint="@color/text_field_hint" />
 
         <EditText
             android:layout_width="match_parent"
@@ -39,7 +49,9 @@
             android:id="@+id/editTextPassword"
             android:layout_gravity="center_horizontal"
             android:textColor="@color/text_field"
-            android:background="@drawable/edit_text_login"/>
+            android:background="@drawable/edit_text_login"
+            android:hint="@string/password"
+            android:textColorHint="@color/text_field_hint" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -53,8 +65,9 @@
                 android:layout_marginLeft="0dp"
                 android:text="@string/login_offline"
                 android:id="@+id/buttonOffline"
+                android:textSize="17sp"
                 android:textColor="@color/btn_offline_text"
-                android:background="@drawable/btn_offline" />
+                android:background="@drawable/btn_generic" />
 
             <Button
                 android:layout_width="160dp"
@@ -64,8 +77,9 @@
                 android:text="@string/login"
                 android:id="@+id/buttonLogin"
                 android:layout_gravity="center_horizontal"
+                android:textSize="17sp"
                 android:textColor="@color/btn_login_text"
-                android:background="@drawable/btn_login" />
+                android:background="@drawable/btn_generic" />
 
         </RelativeLayout>
     </LinearLayout>

@@ -1,5 +1,9 @@
 <resources>
 
+    <style name="ButtonLoginTheme" parent="android:Widget.Button">
+        <item name="android:textSize">12sp</item>
+    </style>
+
     <style name="EditTextLoginTheme" parent="android:Widget.EditText">
         <item name="android:textColor">#FFFFFF</item>
     </style>

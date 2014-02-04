@@ -2,6 +2,7 @@ package in.slit.hotori;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.support.v4.widget.CursorAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +22,8 @@ public class BookAdapter extends CursorAdapter {
     private List<Cursor> mOriginalCursors;
 
     class ViewHolder {
+        TextView icon;
+        TextView ext;
         TextView name;
         TextView cached;
     }
@@ -45,8 +48,14 @@ public class BookAdapter extends CursorAdapter {
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         View view = mInflater.inflate(R.layout.adapter_item, parent, false);
         ViewHolder holder = new ViewHolder();
+        holder.icon = (TextView) view.findViewById(R.id.textViewFileIcon);
+        holder.ext = (TextView) view.findViewById(R.id.textViewFileExt);
         holder.name = (TextView) view.findViewById(R.id.textViewItem);
         holder.cached = (TextView) view.findViewById(R.id.textViewCached);
+
+        Typeface typeface = Typeface.createFromAsset(context.getAssets(), "FontAwesome.otf");
+        holder.icon.setTypeface(typeface);
+
         view.setTag(holder);
         return view;
     }

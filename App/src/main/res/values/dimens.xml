@@ -4,8 +4,13 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="activity_login_bg_line_width">2dp</dimen>
+    <dimen name="activity_login_bg_line_width">0dp</dimen>
 
-    <dimen name="btn_stroke_width">2dp</dimen>
-    <dimen name="btn_corner_radius">10dp</dimen>
+    <dimen name="btn_stroke_width">1dp</dimen>
+
+    <dimen name="btn_padding">14dp</dimen>
+    <dimen name="btn_radius">10dp</dimen>
+    <dimen name="btn_shadow_width">1dp</dimen>
+    <dimen name="btn_emboss_radius">12dp</dimen>
+    <dimen name="btn_emboss_width">3dp</dimen>
 </resources>
