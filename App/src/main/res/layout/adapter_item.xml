@@ -2,58 +2,118 @@
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="100dp"
     android:background="@color/catalog_item_bg">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin">
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/catalog_vertical_padding"
+        android:paddingBottom="@dimen/catalog_vertical_padding">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="60dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_alignParentStart="true"
+            android:id="@+id/iconContainer">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/ic_file"
-                android:textSize="48dp"
+                android:textSize="@dimen/ic_catalog_file"
                 android:textColor="@color/catalog_primary_text"
-                android:id="@+id/textViewFileIcon" />
+                android:id="@+id/textViewIcon" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="EXT"
-                android:textSize="13dp"
+                android:text="@string/dummy"
+                android:textSize="@dimen/txt_catalog_book_3"
                 android:textColor="@color/catalog_primary_text"
-                android:id="@+id/textViewFileExt" />
+                android:id="@+id/textViewExt" />
 
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/iconContainer"
             android:text="@string/dummy"
-            android:id="@+id/textViewItem"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            android:textSize="@dimen/txt_catalog_book_1"
+            android:textColor="@color/catalog_primary_text"
+            android:id="@+id/textViewTitle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@id/iconContainer"
+            android:text="@string/ic_date"
+            android:textSize="@dimen/ic_catalog_book_2"
+            android:textColor="@color/catalog_secondary_text"
+            android:id="@+id/textViewDateIcon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@id/textViewDateIcon"
+            android:text="@string/dummy"
+            android:textSize="@dimen/txt_catalog_book_1"
+            android:textColor="@color/catalog_secondary_text"
+            android:id="@+id/textViewDate" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:text="@string/dummy"
+            android:textSize="@dimen/txt_catalog_book_2"
+            android:textColor="@color/catalog_secondary_text"
+            android:id="@+id/textViewConfidential" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ic_protected"
+            android:textSize="@dimen/ic_catalog_book_2"
+            android:textColor="@color/catalog_secondary_text"
+            android:id="@+id/textViewConfidentialIcon"
+            android:layout_alignTop="@id/textViewConfidential"
+            android:layout_toLeftOf="@id/textViewConfidential" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/dummy"
+            android:textSize="@dimen/txt_catalog_book_2"
+            android:textColor="@color/catalog_secondary_text"
             android:id="@+id/textViewCached"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true" />
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignLeft="@id/textViewConfidential"
+            android:layout_alignStart="@id/textViewConfidential" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ic_cached"
+            android:textSize="@dimen/ic_catalog_book_2"
+            android:textColor="@color/catalog_secondary_text"
+            android:id="@+id/textViewCachedIcon"
+            android:layout_below="@+id/textViewConfidentialIcon"
+            android:layout_alignTop="@id/textViewCached"
+            android:layout_toLeftOf="@+id/textViewCached" />
 
     </RelativeLayout>
 </FrameLayout>

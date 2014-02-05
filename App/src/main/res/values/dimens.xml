@@ -6,11 +6,23 @@
 
     <dimen name="activity_login_bg_line_width">0dp</dimen>
 
-    <dimen name="btn_stroke_width">1dp</dimen>
+    <dimen name="catalog_vertical_padding">16dp</dimen>
 
+    <!-- Catalog texts size -->
+    <dimen name="txt_catalog_book_1">17sp</dimen>
+    <dimen name="txt_catalog_book_2">15sp</dimen>
+    <dimen name="txt_catalog_book_3">13dp</dimen>
+    <dimen name="ic_catalog_book_1">17sp</dimen>
+    <dimen name="ic_catalog_book_2">15dp</dimen>
+    <dimen name="ic_catalog_file">40sp</dimen>
+
+    <!-- Login buttons -->
     <dimen name="btn_padding">14dp</dimen>
     <dimen name="btn_radius">10dp</dimen>
     <dimen name="btn_shadow_width">1dp</dimen>
     <dimen name="btn_emboss_radius">12dp</dimen>
     <dimen name="btn_emboss_width">3dp</dimen>
+
+    <!-- Depriciated -->
+    <dimen name="btn_stroke_width">1dp</dimen>
 </resources>
