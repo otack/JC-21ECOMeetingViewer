@@ -6,15 +6,18 @@
 
     <dimen name="activity_login_bg_line_width">0dp</dimen>
 
-    <dimen name="catalog_vertical_padding">16dp</dimen>
+    <dimen name="catalog_vertical_padding">10dp</dimen>
 
-    <!-- Catalog texts size -->
+    <!-- Catalog texts and icons size -->
     <dimen name="txt_catalog_book_1">17sp</dimen>
     <dimen name="txt_catalog_book_2">15sp</dimen>
     <dimen name="txt_catalog_book_3">13dp</dimen>
-    <dimen name="ic_catalog_book_1">17sp</dimen>
-    <dimen name="ic_catalog_book_2">15dp</dimen>
+    <dimen name="ic_catalog_book_1">19sp</dimen>
+    <dimen name="ic_catalog_book_2">17dp</dimen>
     <dimen name="ic_catalog_file">40sp</dimen>
+    <dimen name="ic_catalog_adjust_1">2sp</dimen>
+    <dimen name="ic_catalog_adjust_2">1sp</dimen>
+    <dimen name="ic_catalog_margin">5sp</dimen>
 
     <!-- Login buttons -->
     <dimen name="btn_padding">14dp</dimen>

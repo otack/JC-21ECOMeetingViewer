@@ -2,7 +2,7 @@
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="wrap_content"
     android:background="@color/catalog_item_bg">
 
     <RelativeLayout
@@ -53,10 +53,12 @@
             android:id="@+id/textViewTitle" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/ic_catalog_book_2"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@id/iconContainer"
+            android:paddingBottom="@dimen/ic_catalog_adjust_1"
+            android:layout_marginRight="@dimen/ic_catalog_margin"
             android:text="@string/ic_date"
             android:textSize="@dimen/ic_catalog_book_2"
             android:textColor="@color/catalog_secondary_text"
@@ -83,37 +85,44 @@
             android:id="@+id/textViewConfidential" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/ic_catalog_book_2"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignTop="@id/textViewConfidential"
+            android:layout_toLeftOf="@id/textViewConfidential"
+            android:layout_marginRight="@dimen/ic_catalog_margin"
+            android:paddingTop="@dimen/ic_catalog_adjust_2"
             android:text="@string/ic_protected"
-            android:textSize="@dimen/ic_catalog_book_2"
+            android:textSize="@dimen/ic_catalog_book_1"
             android:textColor="@color/catalog_secondary_text"
             android:id="@+id/textViewConfidentialIcon"
-            android:layout_alignTop="@id/textViewConfidential"
-            android:layout_toLeftOf="@id/textViewConfidential" />
+            android:gravity="center_horizontal" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignLeft="@id/textViewConfidential"
+            android:layout_below="@id/textViewConfidential"
             android:text="@string/dummy"
             android:textSize="@dimen/txt_catalog_book_2"
             android:textColor="@color/catalog_secondary_text"
-            android:id="@+id/textViewCached"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignLeft="@id/textViewConfidential"
-            android:layout_alignStart="@id/textViewConfidential" />
+            android:id="@+id/textViewCached" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/ic_catalog_book_2"
             android:layout_height="wrap_content"
+            android:layout_alignTop="@id/textViewCached"
+            android:layout_alignLeft="@id/textViewConfidentialIcon"
+            android:layout_toLeftOf="@+id/textViewCached"
+            android:layout_below="@id/textViewConfidentialIcon"
+            android:layout_marginRight="@dimen/ic_catalog_margin"
+            android:paddingTop="@dimen/ic_catalog_adjust_2"
             android:text="@string/ic_cached"
             android:textSize="@dimen/ic_catalog_book_2"
             android:textColor="@color/catalog_secondary_text"
             android:id="@+id/textViewCachedIcon"
-            android:layout_below="@+id/textViewConfidentialIcon"
-            android:layout_alignTop="@id/textViewCached"
-            android:layout_toLeftOf="@+id/textViewCached" />
+            android:gravity="center_horizontal" />
 
     </RelativeLayout>
 </FrameLayout>
