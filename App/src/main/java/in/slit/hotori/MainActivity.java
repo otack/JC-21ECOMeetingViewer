@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends ActionBarActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+//        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        getSupportActionBar().setDisplayShowHomeEnabled(false);
 
         if (savedInstanceState == null) {
             SharedPreferences preferences = getSharedPreferences(Const.PREF_NAME, Context.MODE_PRIVATE);
@@ -26,7 +28,7 @@ public class MainActivity extends FragmentActivity {
             }
 
 //            getSupportFragmentManager().beginTransaction()
-//                    .add(R.id.container, new CatalogFragment(Const.LOGIN_MODE_ONLINE))
+//                    .add(R.id.container, new CatalogFragment(Const.LOGIN_MODE_OFFLINE))
 //                    .commit();
         }
     }

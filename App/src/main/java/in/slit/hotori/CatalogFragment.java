@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
 import android.util.Log;
@@ -68,6 +70,8 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
+
         getActivity().getSupportLoaderManager().initLoader(0, null, mCursorLoaderCallbacks);
         getActivity().getSupportLoaderManager().initLoader(0, null, mBooleanLoaderCallbacks);
         getActivity().getSupportLoaderManager().initLoader(0, null, mStringLoaderCallbacks);
@@ -75,12 +79,15 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
         if (mAdapter == null) {
             mAdapter = new BookAdapter(getActivity(), null, false);
             if (loginMode == Const.LOGIN_MODE_ONLINE) {
+                actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.actionbar_bg_online)));
                 StringBuilder url = new StringBuilder(Const.DEFAULT_CATALOG_URI)
                         .append("?token=")
                         .append(getAccessToken());
                 Bundle args = new Bundle(1);
                 args.putString(Const.BUNDLE_URI, new String(url));
                 getActivity().getSupportLoaderManager().restartLoader(Const.LOADER_RAW, args, mStringLoaderCallbacks);
+            } else {
+                actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.actionbar_bg_offline)));
             }
             getActivity().getSupportLoaderManager().restartLoader(Const.LOADER_CURSOR, null, mCursorLoaderCallbacks);
         } else {

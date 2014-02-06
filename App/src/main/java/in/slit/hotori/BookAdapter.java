@@ -42,6 +42,11 @@ public class BookAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         ViewHolder holder = (ViewHolder) view.getTag();
+
+        String title = cursor.getString(cursor
+                .getColumnIndexOrThrow(Book.KEY_TITLE));
+        String ext = title.substring(title.lastIndexOf(".")+1, title.length()).toUpperCase();
+
         String name = cursor.getString(cursor
                 .getColumnIndexOrThrow(Book.KEY_NAME));
 
@@ -79,6 +84,7 @@ public class BookAdapter extends CursorAdapter {
             holder.cachedIcon.setTextColor(context.getResources().getColor(R.color.catalog_secondary_text));
             holder.cached.setTextColor(context.getResources().getColor(R.color.catalog_secondary_text));
         }
+        holder.ext.setText(ext);
         holder.name.setText(name);
         holder.date.setText(new String(date));
         holder.cached.setText(cached);

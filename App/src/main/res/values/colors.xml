@@ -16,7 +16,8 @@
 	<color name="seek_progress">#FFFFFF</color>
     <color name="md__transparent">#00000000</color>
 
-    <color name="actionbar_bg">#a01e5a</color>
+    <color name="actionbar_bg_online">#a01e5a</color>
+    <color name="actionbar_bg_offline">#9a66ff</color>
 
     <!-- Buttons -->
     <color name="btn_bg_gradient_end">#2c262e</color>
