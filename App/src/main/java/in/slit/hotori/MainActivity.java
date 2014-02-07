@@ -17,19 +17,19 @@ public class MainActivity extends ActionBarActivity {
 //        getSupportActionBar().setDisplayShowHomeEnabled(false);
 
         if (savedInstanceState == null) {
-            SharedPreferences preferences = getSharedPreferences(Const.PREF_NAME, Context.MODE_PRIVATE);
-            int loginMode = preferences.getInt(Const.PREF_DEFAULT_LOGIN_MODE, 0);
-            if (LoginUtils.hasAccessToken(this) && loginMode != 0) {
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.container, new CatalogFragment(loginMode))
-                        .commit();
-            } else {
-                startActivityForResult(new Intent(this, LoginActivity.class), Const.LOGIN_MODE);
-            }
+//            SharedPreferences preferences = getSharedPreferences(Const.PREF_NAME, Context.MODE_PRIVATE);
+//            int loginMode = preferences.getInt(Const.PREF_DEFAULT_LOGIN_MODE, 0);
+//            if (LoginUtils.hasAccessToken(this) && loginMode != 0) {
+//                getSupportFragmentManager().beginTransaction()
+//                        .add(R.id.container, new CatalogFragment(loginMode))
+//                        .commit();
+//            } else {
+//                startActivityForResult(new Intent(this, LoginActivity.class), Const.LOGIN_MODE);
+//            }
 
-//            getSupportFragmentManager().beginTransaction()
-//                    .add(R.id.container, new CatalogFragment(Const.LOGIN_MODE_OFFLINE))
-//                    .commit();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container, new CatalogFragment(Const.LOGIN_MODE_OFFLINE))
+                    .commit();
         }
     }
 

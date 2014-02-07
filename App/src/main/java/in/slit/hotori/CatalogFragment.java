@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Filter;
+import android.widget.FilterQueryProvider;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -93,6 +94,23 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
         } else {
             getActivity().getSupportLoaderManager().restartLoader(Const.LOADER_CURSOR, null, mCursorLoaderCallbacks);
         }
+        mListView.setTextFilterEnabled(true);
+
+        mAdapter.setFilterQueryProvider(new FilterQueryProvider() {
+            @Override
+            public Cursor runQuery(CharSequence constraint) {
+                String word = "%" + constraint.toString() + "%";
+                Cursor cursor = getActivity().getContentResolver().query(
+                        Book.CONTENT_URI,
+                        null,
+                        "`" + Book.KEY_NAME + "` LIKE ?",
+                        new String[]{word},
+                        Book.KEY_MODDATE + " DESC"
+                );
+                return cursor;
+            }
+        });
+
         mFilter = mAdapter.getFilter();
         mListView.setAdapter(mAdapter);
     }
@@ -138,8 +156,16 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
     @Override
     public boolean onQueryTextChange(String queryText) {
         if (TextUtils.isEmpty(queryText)) {
-            mFilter.filter(null);
+//            mFilter.filter(null);
+//            mAdapter.runQueryOnBackgroundThread(null);
+//            mListView.clearTextFilter();
+//            Filter lFilter = mAdapter.getFilter();
+            mFilter.filter("");
         } else {
+//            mFilter.filter(queryText);
+//            mAdapter.runQueryOnBackgroundThread(queryText);
+//            mListView.setFilterText(queryText);
+//            Filter lFilter = mAdapter.getFilter();
             mFilter.filter(queryText);
         }
         return true;
