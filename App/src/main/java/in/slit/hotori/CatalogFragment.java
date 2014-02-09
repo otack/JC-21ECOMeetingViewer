@@ -1,7 +1,9 @@
 package in.slit.hotori;
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -41,6 +43,10 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
     private String mFilePath;
 
     int loginMode;
+
+    private final String defOrder = "`" + Book.KEY_MODDATE + "` DESC";
+    private final String offlineSelection = "`" + Book.KEY_CACHED + "` == 'true'";
+    private final String searchSelection = "`" + Book.KEY_NAME + "` LIKE ?";
 
     CursorLoaderCallbacks mCursorLoaderCallbacks = new CursorLoaderCallbacks();
     BooleanLoaderCallbacks mBooleanLoaderCallbacks = new BooleanLoaderCallbacks();
@@ -100,14 +106,22 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
             @Override
             public Cursor runQuery(CharSequence constraint) {
                 String word = "%" + constraint.toString() + "%";
-                Cursor cursor = getActivity().getContentResolver().query(
+                if (loginMode == Const.LOGIN_MODE_ONLINE) {
+                    return getActivity().getContentResolver().query(
+                            Book.CONTENT_URI,
+                            null,
+                            searchSelection,
+                            new String[]{word},
+                            defOrder
+                    );
+                }
+                return getActivity().getContentResolver().query(
                         Book.CONTENT_URI,
                         null,
-                        "`" + Book.KEY_NAME + "` LIKE ?",
+                        searchSelection + " AND " + offlineSelection,
                         new String[]{word},
-                        Book.KEY_MODDATE + " DESC"
+                        defOrder
                 );
-                return cursor;
             }
         });
 
@@ -139,6 +153,19 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_filter:
+                View dialogView = getActivity().getLayoutInflater().inflate(R.layout.dialog_catalog_filter, null);
+                final AlertDialog dialog = new AlertDialog.Builder(getActivity())
+                        .setTitle(R.string.login_uri)
+                        .setView(dialogView)
+                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                            }
+                        })
+                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                            }
+                        }).create();
+                dialog.show();
                 return true;
             case R.id.action_sort:
                 return true;
@@ -156,16 +183,8 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
     @Override
     public boolean onQueryTextChange(String queryText) {
         if (TextUtils.isEmpty(queryText)) {
-//            mFilter.filter(null);
-//            mAdapter.runQueryOnBackgroundThread(null);
-//            mListView.clearTextFilter();
-//            Filter lFilter = mAdapter.getFilter();
-            mFilter.filter("");
+            mFilter.filter(""); /* nullにすると入力フォームをクリアしても一覧が更新されなくなります */
         } else {
-//            mFilter.filter(queryText);
-//            mAdapter.runQueryOnBackgroundThread(queryText);
-//            mListView.setFilterText(queryText);
-//            Filter lFilter = mAdapter.getFilter();
             mFilter.filter(queryText);
         }
         return true;
@@ -222,10 +241,9 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
             switch (i) {
                 case Const.LOADER_CURSOR:
                     if (loginMode == Const.LOGIN_MODE_ONLINE) {
-                        return new CursorLoader(getActivity(), Book.CONTENT_URI, null, null, null, null);
-                    } else {
-                        return new CursorLoader(getActivity(), Book.CONTENT_URI, null, Book.KEY_CACHED + " LIKE 'true'", null, null);
+                        return new CursorLoader(getActivity(), Book.CONTENT_URI, null, null, null, defOrder);
                     }
+                    return new CursorLoader(getActivity(), Book.CONTENT_URI, null, offlineSelection, null, defOrder);
                 default:
                     break;
             }

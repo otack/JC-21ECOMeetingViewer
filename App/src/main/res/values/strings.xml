@@ -27,6 +27,16 @@
 
     <string name="filter">絞り込み</string>
     <string name="sort">並べ替え</string>
+    <string name="period">期間</string>
+    <string name="filter_by_follow_period">次の期間で絞り込む</string>
+    <string name="filter_period_from">から</string>
+    <string name="filter_period_to">までの間</string>
+    <string name="target_class">クラス</string>
+    <string name="author">投稿者</string>
+    <string name="confidential">保護</string>
+    <string name="cached_state">ダウンロード状態</string>
+    <string name="search_by_string">文字列検索</string>
+    <string name="not_specified">指定なし</string>
 
     <string name="downloading_catalog">カタログをダウンロード中…</string>
     <string name="updating_databases">データベースを更新中…</string>

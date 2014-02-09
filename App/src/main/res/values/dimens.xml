@@ -15,7 +15,7 @@
     <dimen name="ic_catalog_book_1">18sp</dimen>
     <dimen name="ic_catalog_book_2">16dp</dimen>
     <dimen name="ic_catalog_file">32sp</dimen>
-    <dimen name="ic_catalog_adjust_1">3sp</dimen>
+    <dimen name="ic_catalog_adjust_1">4sp</dimen>
     <dimen name="ic_catalog_adjust_2">2sp</dimen>
     <dimen name="ic_catalog_margin">8sp</dimen>
 
@@ -23,6 +23,10 @@
     <dimen name="catalog_left_margin">7dp</dimen>
     <dimen name="catalog_right_margin">14dp</dimen>
     <dimen name="catalog_vertical_padding">10dp</dimen>
+
+    <!-- Catalog filter dialog layout dims -->
+    <dimen name="catalog_dialog_content_width">240dp</dimen>
+    <dimen name="catalog_dialog">14dp</dimen>
 
     <!-- Login buttons -->
     <dimen name="btn_padding">14dp</dimen>
