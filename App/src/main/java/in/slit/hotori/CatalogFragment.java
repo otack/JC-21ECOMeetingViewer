@@ -412,7 +412,7 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
                         if (radioGroupCached.getCheckedRadioButtonId() != R.id.radioButtonCachedNone &&
                                 radioButtonCached.isEnabled()) {
                             StringBuilder cachedQueryBuilder = new StringBuilder(Book.KEY_CACHED);
-                            if (radioGroupProtected.getCheckedRadioButtonId() == R.id.radioButtonCached) {
+                            if (radioGroupCached.getCheckedRadioButtonId() == R.id.radioButtonCached) {
                                 cachedQueryBuilder.append(" == 'true'");
                             } else {
                                 cachedQueryBuilder.append(" == 'false'");
