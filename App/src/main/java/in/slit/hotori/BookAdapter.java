@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.support.v4.widget.CursorAdapter;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -50,18 +52,8 @@ public class BookAdapter extends CursorAdapter implements Filterable {
         String name = cursor.getString(cursor
                 .getColumnIndexOrThrow(Book.KEY_NAME));
 
-        Date baseDate;
-        String dateValue = cursor.getString(cursor.getColumnIndex(Book.KEY_MODDATE));
-        StringBuilder builder = new StringBuilder(dateValue).delete(23, 29);
-        SimpleDateFormat baseFormat = new SimpleDateFormat("yyyy-MM-dd'T'H:m:s.S");
-        try {
-            baseDate = baseFormat.parse(new String(builder));
-        } catch (ParseException ex) {
-            throw new RuntimeException("a bad date string.");
-        }
-        SimpleDateFormat applyFormat = new SimpleDateFormat("yyyy-MM-dd'T'H:m:s.S");
-        applyFormat.applyPattern("yyyy'年'MM'月'dd'日'");
-        String date = applyFormat.format(baseDate);
+        CharSequence date = DateFormat.format("yyyy'年'MM'月'dd'日'",
+                cursor.getLong(cursor.getColumnIndex(Book.KEY_MODDATE)));
 
         String confidential;
         if (cursor.getString(cursor.getColumnIndexOrThrow(Book.KEY_CONFIDENTIAL)).equals("true")) {
@@ -86,7 +78,7 @@ public class BookAdapter extends CursorAdapter implements Filterable {
         }
         holder.ext.setText(ext);
         holder.name.setText(name);
-        holder.date.setText(new String(date));
+        holder.date.setText(date);
         holder.cached.setText(cached);
         holder.confidential.setText(confidential);
     }

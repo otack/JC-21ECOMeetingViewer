@@ -114,12 +114,16 @@ public class BookProvider extends ContentProvider {
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
+        String limit = uri.getQueryParameter("limit");
+        if (uri.getQueryParameter("distinct") != null) {
+            qb.setDistinct(true);
+        }
         if (TextUtils.isEmpty(sortOrder)) {
             sortOrder = Book.KEY_ID + " DESC";
         }
 
         SQLiteDatabase db = mHelper.getReadableDatabase();
-        Cursor cursor = qb.query(db, projection, selection, selectionArgs, null, null, sortOrder);
+        Cursor cursor = qb.query(db, projection, selection, selectionArgs, null, null, sortOrder, limit);
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
         return cursor;
     }

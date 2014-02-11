@@ -5,6 +5,7 @@
     <string name="dummy">DUMMY</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="run">実行</string>
     <string name="ok">OK</string>
     <string name="cancel">キャンセル</string>
     <string name="reset_uri">初期値に戻す</string>
@@ -25,18 +26,23 @@
     <string name="login_failure_please_check_login_uri">ログインに失敗しました。ネットワークの状態またはログインURIをもう一度確認してください。</string>
     <string name="login_failure_please_check_id_pass">ログインに失敗しました。ID・パスワードをもう一度確認してください。</string>
 
+    <string name="filter_search">絞り込み検索</string>
+    <string name="search_by_string">文字列</string>
+    <string name="contains">を含む</string>
+    <string name="not_contains">を含まない</string>
+    <string name="start_with">で始まる</string>
+    <string name="end_with">で終わる</string>
     <string name="filter">絞り込み</string>
     <string name="sort">並べ替え</string>
     <string name="period">期間</string>
     <string name="filter_by_follow_period">次の期間で絞り込む</string>
     <string name="filter_period_from">から</string>
-    <string name="filter_period_to">までの間</string>
+    <string name="filter_period_to">まで</string>
     <string name="target_class">クラス</string>
     <string name="author">投稿者</string>
     <string name="confidential">保護</string>
     <string name="cached_state">ダウンロード状態</string>
-    <string name="search_by_string">文字列検索</string>
-    <string name="not_specified">指定なし</string>
+    <string name="not_specified">指定しない</string>
 
     <string name="downloading_catalog">カタログをダウンロード中…</string>
     <string name="updating_databases">データベースを更新中…</string>
@@ -46,12 +52,14 @@
 
     <string name="cached">DL済</string>
     <string name="non_cached">未DL</string>
+    <string name="cached_f">ダウンロード済</string>
+    <string name="non_cached_f">未ダウンロード</string>
     <string name="protected_file">保護あり</string>
     <string name="non_protected_file">保護なし</string>
 
     <string name="year">年</string>
     <string name="month">月</string>
-    <string name="date">日</string>
+    <string name="day">日</string>
     <string name="hour">時</string>
     <string name="minute">分</string>
 

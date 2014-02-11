@@ -1,229 +1,220 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/scrollViewFilterDialog">
 
-    <ScrollView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/scrollView" >
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/period"
+            android:textColor="@color/gray"
+            android:id="@+id/textViewPeriod" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioGroupPeriod">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/not_specified"
+                android:id="@+id/radioButtonPeriodNone"
+                android:checked="true" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filter_by_follow_period"
+                android:id="@+id/radioButtonPeriodBy" />
+        </RadioGroup>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:weightSum="1">
+            android:layout_marginLeft="@dimen/dialog_indent">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/checkBoxPeriodFrom"
+                android:layout_alignTop="@+id/buttonPeriodFrom"
+                android:layout_alignBottom="@+id/buttonPeriodFrom" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/checkBoxPeriodTo"
+                android:layout_alignTop="@+id/buttonPeriodTo"
+                android:layout_alignBottom="@+id/buttonPeriodTo"
+                android:layout_alignParentLeft="true" />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/buttonPeriodFrom"
+                android:layout_alignBottom="@+id/buttonPeriodFrom"
+                android:paddingTop="@dimen/dialog_filter_period_text_top_margin"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/period"
-                android:textColor="@color/gray"
-                android:id="@+id/textView3" />
+                android:text="@string/filter_period_from"
+                android:id="@+id/textViewPeriodFrom"
+                android:gravity="center_vertical" />
 
-            <RadioGroup
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/buttonPeriodTo"
+                android:layout_alignBottom="@+id/buttonPeriodTo"
+                android:paddingTop="@dimen/dialog_filter_period_text_top_margin"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/filter_period_to"
+                android:id="@+id/textViewPeriodTo"
+                android:gravity="center_vertical" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/textViewPeriodFrom"
+                android:layout_toRightOf="@+id/checkBoxPeriodFrom"
+                android:text="@string/dummy"
+                android:id="@+id/buttonPeriodFrom" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/textViewPeriodTo"
+                android:layout_toRightOf="@+id/checkBoxPeriodTo"
+                android:layout_below="@+id/buttonPeriodFrom"
+                android:text="@string/dummy"
+                android:id="@+id/buttonPeriodTo" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dialog_category_margin"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/target_class"
+            android:textColor="@color/gray"
+            android:id="@+id/textViewClass" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerClass" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dialog_category_margin"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/search_by_string"
+            android:textColor="@color/gray"
+            android:id="@+id/textViewSearchByWord" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:id="@+id/spinnerSearchBy" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/spinnerSearchBy"
+                android:singleLine="true"
+                android:id="@+id/editTextSearch" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dialog_category_margin"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/confidential"
+            android:textColor="@color/gray"
+            android:id="@+id/textViewProtect" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioGroupProtected">
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/not_specified"
-                    android:id="@+id/radioButton3"
-                    android:layout_alignEnd="@+id/button" />
+                    android:id="@+id/radioButtonProtectNone"
+                    android:checked="true" />
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/filter_by_follow_period"
-                    android:id="@+id/radioButton4" />
-            </RadioGroup>
+                    android:text="@string/protected_file"
+                    android:id="@+id/radioButtonProtected" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right">
-
-                <Button
+                <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/dummy"
-                    android:id="@+id/button" />
+                    android:text="@string/non_protected_file"
+                    android:id="@+id/radioButtonNoneProtected" />
+        </RadioGroup>
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dummy"
-                    android:id="@+id/button2"
-                    android:layout_below="@+id/button"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dialog_category_margin"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/cached_state"
+            android:textColor="@color/gray"
+            android:id="@+id/textViewCached" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="@string/filter_period_from"
-                    android:id="@+id/textView"
-                    android:layout_above="@+id/button2"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentTop="true"
-                    android:gravity="center_vertical" />
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioGroupCached">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="@string/filter_period_to"
-                    android:id="@+id/textView2"
-                    android:layout_alignBottom="@+id/button2"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_below="@+id/textView"
-                    android:gravity="center_vertical" />
-            </RelativeLayout>
-
-            <TextView
+            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/target_class"
-                android:textColor="@color/gray"
-                android:id="@+id/textView8" />
+                android:text="@string/not_specified"
+                android:id="@+id/radioButtonCachedNone"
+                android:checked="true" />
 
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinner2" />
-
-            <TextView
+            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/author"
-                android:textColor="@color/gray"
-                android:id="@+id/textView9" />
+                android:text="@string/cached_f"
+                android:id="@+id/radioButtonCached" />
 
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinner3" />
-
-            <TextView
+            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/confidential"
-                android:textColor="@color/gray"
-                android:id="@+id/textView4" />
+                android:text="@string/non_cached_f"
+                android:id="@+id/radioButtonNoneCached" />
+        </RadioGroup>
 
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/not_specified"
-                        android:id="@+id/radioButton5" />
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/protected_file"
-                        android:id="@+id/radioButton6" />
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/non_protected_file"
-                        android:id="@+id/radioButton7" />
-                </LinearLayout>
-
-            </RadioGroup>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/cached_state"
-                android:textColor="@color/gray"
-                android:id="@+id/textView6" />
-
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/not_specified"
-                        android:id="@+id/radioButton" />
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/cached"
-                        android:id="@+id/radioButton1" />
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/non_cached"
-                        android:id="@+id/radioButton2" />
-                </LinearLayout>
-
-            </RadioGroup>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/search_by_string"
-                android:textColor="@color/gray"
-                android:id="@+id/textView5" />
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="181dp"
-                android:layout_marginBottom="99dp">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:id="@+id/editText" />
-
-                <Spinner
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/spinner"
-                    android:layout_gravity="center_horizontal" />
-            </LinearLayout>
-
-        </LinearLayout>
-    </ScrollView>
-
-</RelativeLayout>
+    </LinearLayout>
+</ScrollView>

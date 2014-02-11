@@ -9,6 +9,9 @@ import org.xmlpull.v1.XmlPullParser;
 
 import java.io.File;
 import java.io.StringReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class StoreCatalogLoader extends AsyncLoader<Boolean> {
     private String mArg;
@@ -40,7 +43,16 @@ public class StoreCatalogLoader extends AsyncLoader<Boolean> {
                     values.put(Book.KEY_TITLE, title);
                     values.put(Book.KEY_ID, count++);
                     values.put(Book.KEY_NAME, xmlPullParser.getAttributeValue(null, "name"));
-                    values.put(Book.KEY_MODDATE, xmlPullParser.getAttributeValue(null, "moddate"));
+                    Date date;
+                    String dateValue = xmlPullParser.getAttributeValue(null, "moddate");
+                    StringBuilder builder = new StringBuilder(dateValue).delete(23, 29);
+                    SimpleDateFormat baseFormat = new SimpleDateFormat("yyyy-MM-dd'T'H:m:s.S");
+                    try {
+                        date = baseFormat.parse(new String(builder));
+                    } catch (ParseException ex) {
+                        throw new RuntimeException("a bad date string.");
+                    }
+                    values.put(Book.KEY_MODDATE, date.getTime());
                     values.put(Book.KEY_SIZE, xmlPullParser.getAttributeValue(null, "size"));
                     values.put(Book.KEY_VOLATILE, xmlPullParser.getAttributeValue(null, "volatile"));
                     values.put(Book.KEY_CONFIDENTIAL, xmlPullParser.getAttributeValue(null, "confidential"));

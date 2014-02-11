@@ -6,7 +6,6 @@
 
     <dimen name="activity_login_bg_line_width">0dp</dimen>
 
-
     <!-- Catalog texts and icons size -->
     <dimen name="txt_catalog_book_1">17sp</dimen>
     <dimen name="txt_catalog_book_2">15sp</dimen>
@@ -19,14 +18,16 @@
     <dimen name="ic_catalog_adjust_2">2sp</dimen>
     <dimen name="ic_catalog_margin">8sp</dimen>
 
-    <!-- Catalog layout dims -->
+    <!-- Catalog layout -->
     <dimen name="catalog_left_margin">7dp</dimen>
     <dimen name="catalog_right_margin">14dp</dimen>
     <dimen name="catalog_vertical_padding">10dp</dimen>
 
-    <!-- Catalog filter dialog layout dims -->
-    <dimen name="catalog_dialog_content_width">240dp</dimen>
-    <dimen name="catalog_dialog">14dp</dimen>
+    <!-- Catalog filter dialog layout -->
+    <dimen name="dialog_indent">8dp</dimen>
+    <dimen name="dialog_category_margin">16dp</dimen>
+    <dimen name="dialog_filter_period_text_top_margin">8sp</dimen>
+    <dimen name="dialog_filter_period_text_width">32sp</dimen>
 
     <!-- Login buttons -->
     <dimen name="btn_padding">14dp</dimen>
