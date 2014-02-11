@@ -22,8 +22,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/period"
+                android:textColor="@color/gray"
                 android:id="@+id/textView3" />
 
             <RadioGroup
@@ -35,8 +36,6 @@
                     android:layout_height="wrap_content"
                     android:text="@string/not_specified"
                     android:id="@+id/radioButton3"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignRight="@+id/button"
                     android:layout_alignEnd="@+id/button" />
 
                 <RadioButton
@@ -69,7 +68,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="@string/filter_period_from"
                     android:id="@+id/textView"
                     android:layout_above="@+id/button2"
@@ -81,7 +80,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="@string/filter_period_to"
                     android:id="@+id/textView2"
                     android:layout_alignBottom="@+id/button2"
@@ -94,8 +93,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/target_class"
+                android:textColor="@color/gray"
                 android:id="@+id/textView8" />
 
             <Spinner
@@ -106,8 +106,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/author"
+                android:textColor="@color/gray"
                 android:id="@+id/textView9" />
 
             <Spinner
@@ -118,8 +119,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/confidential"
+                android:textColor="@color/gray"
                 android:id="@+id/textView4" />
 
             <RadioGroup
@@ -156,8 +158,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/cached_state"
+                android:textColor="@color/gray"
                 android:id="@+id/textView6" />
 
             <RadioGroup
@@ -180,7 +183,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/cached"
-                        android:id="@+id/radioButton" />
+                        android:id="@+id/radioButton1" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
@@ -194,16 +197,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/search_by_string"
+                android:textColor="@color/gray"
                 android:id="@+id/textView5" />
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="181dp"
                 android:layout_marginBottom="99dp">
