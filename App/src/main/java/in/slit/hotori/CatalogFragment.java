@@ -57,12 +57,43 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
 
     private AlertDialog mFilterDialog;
 
+    private View mDialogView;
+    private RadioGroup mRadioGroupPeriod;
+    private RadioButton mRadioButtonPeriodNone;
+    private RadioButton mRadioButtonPeriodBy;
+    private CheckBox mCheckBoxPeriodFrom;
+    private CheckBox mCheckBoxPeriodTo;
+    private Button mButtonPeriodFrom;
+    private Button mButtonPeriodTo;
+    private Spinner mSpinnerClass;
+    private EditText mEditTextSearch;
+    private Spinner mSpinnerSearchBy;
+    private RadioGroup mRadioGroupProtected;
+    private RadioButton mRadioButtonProtectNone;
+    private RadioButton mRadioButtonProtected;
+    private RadioButton mRadioButtonNoneProtected;
+    private RadioGroup mRadioGroupCached;
+    private RadioButton mRadioButtonCachedNone;
+    private RadioButton mRadioButtonCached;
+    private RadioButton mRadioButtonNoneCached;
+
     private int mCurrentFilterStartYear;
     private int mCurrentFilterStartMonth;
     private int mCurrentFilterStartDay;
     private int mCurrentFilterEndYear;
     private int mCurrentFilterEndMonth;
     private int mCurrentFilterEndDay;
+
+    private boolean filterSavedPeriodEnabled = false;
+    private String filterSavedPeriodFrom = "";
+    private boolean filterSavedPeriodFromEnabled = true;
+    private String filterSavedPeriodTo = "";
+    private boolean filterSavedPeriodToEnabled = true;
+    private String filterSavedSearch = "";
+    private int filterSavedSearchBy = 0;
+    private String filterSavedClass = "";
+    private int filterSavedProtected = 0;
+    private int filterSavedCached = 0;
 
     int loginMode;
 
@@ -143,6 +174,8 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
 
         mFilter = mAdapter.getFilter();
         mListView.setAdapter(mAdapter);
+
+        createFilterDialog();
     }
 
     @Override
@@ -169,7 +202,8 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_filter:
-                createFilterDialog();
+                onRestoreFilterState();
+                mFilterDialog.show();
                 return true;
             case R.id.action_sort:
                 return true;
@@ -195,50 +229,52 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
     }
 
     private void createFilterDialog() {
-        final View dialogView = getActivity().getLayoutInflater().inflate(R.layout.dialog_catalog_filter, null);
-        final RadioGroup radioGroupPeriod = (RadioGroup) dialogView.findViewById(R.id.radioGroupPeriod);
-        final CheckBox checkBoxPeriodFrom = (CheckBox) dialogView.findViewById(R.id.checkBoxPeriodFrom);
-        final CheckBox checkBoxPeriodTo = (CheckBox) dialogView.findViewById(R.id.checkBoxPeriodTo);
-        final Button buttonPeriodFrom = (Button) dialogView.findViewById(R.id.buttonPeriodFrom);
-        final Button buttonPeriodTo = (Button) dialogView.findViewById(R.id.buttonPeriodTo);
-        final Spinner spinnerClass = (Spinner) dialogView.findViewById(R.id.spinnerClass);
-        final EditText editTextSearch = (EditText) dialogView.findViewById(R.id.editTextSearch);
-        final Spinner spinnerSearchBy = (Spinner) dialogView.findViewById(R.id.spinnerSearchBy);
-        final RadioGroup radioGroupProtected = (RadioGroup) dialogView.findViewById(R.id.radioGroupProtected);
-        final RadioButton radioButtonProtectNone = (RadioButton) dialogView.findViewById(R.id.radioButtonProtectNone);
-        final RadioButton radioButtonProtected = (RadioButton) dialogView.findViewById(R.id.radioButtonProtected);
-        final RadioButton radioButtonNoneProtected = (RadioButton) dialogView.findViewById(R.id.radioButtonNoneProtected);
-        final RadioGroup radioGroupCached = (RadioGroup) dialogView.findViewById(R.id.radioGroupCached);
-        final RadioButton radioButtonCachedNone = (RadioButton) dialogView.findViewById(R.id.radioButtonCachedNone);
-        final RadioButton radioButtonCached = (RadioButton) dialogView.findViewById(R.id.radioButtonCached);
-        final RadioButton radioButtonNoneCached = (RadioButton) dialogView.findViewById(R.id.radioButtonNoneCached);
+        mDialogView = getActivity().getLayoutInflater().inflate(R.layout.dialog_catalog_filter, null);
+        mRadioGroupPeriod = (RadioGroup) mDialogView.findViewById(R.id.radioGroupPeriod);
+        mRadioButtonPeriodNone = (RadioButton) mDialogView.findViewById(R.id.radioButtonPeriodNone);
+        mRadioButtonPeriodBy = (RadioButton) mDialogView.findViewById(R.id.radioButtonPeriodBy);
+        mCheckBoxPeriodFrom = (CheckBox) mDialogView.findViewById(R.id.checkBoxPeriodFrom);
+        mCheckBoxPeriodTo = (CheckBox) mDialogView.findViewById(R.id.checkBoxPeriodTo);
+        mButtonPeriodFrom = (Button) mDialogView.findViewById(R.id.buttonPeriodFrom);
+        mButtonPeriodTo = (Button) mDialogView.findViewById(R.id.buttonPeriodTo);
+        mSpinnerClass = (Spinner) mDialogView.findViewById(R.id.spinnerClass);
+        mEditTextSearch = (EditText) mDialogView.findViewById(R.id.editTextSearch);
+        mSpinnerSearchBy = (Spinner) mDialogView.findViewById(R.id.spinnerSearchBy);
+        mRadioGroupProtected = (RadioGroup) mDialogView.findViewById(R.id.radioGroupProtected);
+        mRadioButtonProtectNone = (RadioButton) mDialogView.findViewById(R.id.radioButtonProtectNone);
+        mRadioButtonProtected = (RadioButton) mDialogView.findViewById(R.id.radioButtonProtected);
+        mRadioButtonNoneProtected = (RadioButton) mDialogView.findViewById(R.id.radioButtonNoneProtected);
+        mRadioGroupCached = (RadioGroup) mDialogView.findViewById(R.id.radioGroupCached);
+        mRadioButtonCachedNone = (RadioButton) mDialogView.findViewById(R.id.radioButtonCachedNone);
+        mRadioButtonCached = (RadioButton) mDialogView.findViewById(R.id.radioButtonCached);
+        mRadioButtonNoneCached = (RadioButton) mDialogView.findViewById(R.id.radioButtonNoneCached);
 
         Calendar calendar = Calendar.getInstance();
-        setButtonFilterStartPeriod(buttonPeriodFrom, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-        setButtonFilterEndPeriod(buttonPeriodTo, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-        checkBoxPeriodFrom.setEnabled(false);
-        checkBoxPeriodTo.setEnabled(false);
-        buttonPeriodFrom.setEnabled(false);
-        buttonPeriodTo.setEnabled(false);
-        checkBoxPeriodFrom.setChecked(true);
-        checkBoxPeriodTo.setChecked(true);
-        radioGroupPeriod.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        setButtonFilterStartPeriod(mButtonPeriodFrom, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        setButtonFilterEndPeriod(mButtonPeriodTo, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        mCheckBoxPeriodFrom.setEnabled(false);
+        mCheckBoxPeriodTo.setEnabled(false);
+        mButtonPeriodFrom.setEnabled(false);
+        mButtonPeriodTo.setEnabled(false);
+        mCheckBoxPeriodFrom.setChecked(true);
+        mCheckBoxPeriodTo.setChecked(true);
+        mRadioGroupPeriod.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int resId) {
                 if (resId == R.id.radioButtonPeriodBy) {
-                    checkBoxPeriodFrom.setEnabled(true);
-                    checkBoxPeriodTo.setEnabled(true);
-                    buttonPeriodFrom.setEnabled(true);
-                    buttonPeriodTo.setEnabled(true);
+                    mCheckBoxPeriodFrom.setEnabled(true);
+                    mCheckBoxPeriodTo.setEnabled(true);
+                    mButtonPeriodFrom.setEnabled(true);
+                    mButtonPeriodTo.setEnabled(true);
                 } else {
-                    checkBoxPeriodFrom.setEnabled(false);
-                    checkBoxPeriodTo.setEnabled(false);
-                    buttonPeriodFrom.setEnabled(false);
-                    buttonPeriodTo.setEnabled(false);
+                    mCheckBoxPeriodFrom.setEnabled(false);
+                    mCheckBoxPeriodTo.setEnabled(false);
+                    mButtonPeriodFrom.setEnabled(false);
+                    mButtonPeriodTo.setEnabled(false);
                 }
             }
         });
-        buttonPeriodFrom.setOnClickListener(new View.OnClickListener() {
+        mButtonPeriodFrom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View button) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
@@ -253,7 +289,7 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
                 datePickerDialog.show();
             }
         });
-        buttonPeriodTo.setOnClickListener(new View.OnClickListener() {
+        mButtonPeriodTo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View button) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
@@ -293,16 +329,7 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
             cursor.moveToNext();
         }
         cursor.close();
-        spinnerClass.setAdapter(adapterClass);
-        spinnerClass.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-            }
-        });
+        mSpinnerClass.setAdapter(adapterClass);
 
         ArrayAdapter<String> adapterSearchBy = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item);
         adapterSearchBy.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -310,60 +337,68 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
         adapterSearchBy.add(getString(R.string.not_contains));
         adapterSearchBy.add(getString(R.string.start_with));
         adapterSearchBy.add(getString(R.string.end_with));
-        spinnerSearchBy.setAdapter(adapterSearchBy);
+        mSpinnerSearchBy.setAdapter(adapterSearchBy);
 
         if (loginMode == Const.LOGIN_MODE_OFFLINE) {
-            radioGroupCached.clearCheck();
-            radioGroupCached.check(R.id.radioButtonCached);
-            radioButtonCachedNone.setEnabled(false);
-            radioButtonCached.setEnabled(false);
-            radioButtonNoneCached.setEnabled(false);
+            mRadioGroupCached.clearCheck();
+            mRadioGroupCached.check(R.id.radioButtonCached);
+            mRadioButtonCachedNone.setEnabled(false);
+            mRadioButtonCached.setEnabled(false);
+            mRadioButtonNoneCached.setEnabled(false);
         }
 
         mFilterDialog = new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.filter_search)
-                .setView(dialogView)
+                .setView(mDialogView)
                 .setPositiveButton(R.string.run, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         StringBuilder selectionBuilder = new StringBuilder();
-                        if (!TextUtils.isEmpty(editTextSearch.getText())) {
-                            String word = editTextSearch.getText().toString();
+                        if (!TextUtils.isEmpty(mEditTextSearch.getText())) {
+                            String word = mEditTextSearch.getText().toString();
+                            filterSavedSearch = word;
                             StringBuilder wordQueryBuilder = new StringBuilder();
-                            switch (spinnerSearchBy.getSelectedItemPosition()) {
+                            switch (mSpinnerSearchBy.getSelectedItemPosition()) {
                                 case 0:
                                     wordQueryBuilder.append(Book.KEY_NAME)
                                             .append(" LIKE '%")
                                             .append(word)
                                             .append("%'");
+                                    filterSavedSearchBy = 0;
                                     break;
                                 case 1:
                                     wordQueryBuilder.append(Book.KEY_NAME)
                                             .append(" NOT LIKE '%")
                                             .append(word)
                                             .append("%'");
+                                    filterSavedSearchBy = 1;
                                     break;
                                 case 2:
                                     wordQueryBuilder.append(Book.KEY_NAME)
                                             .append(" LIKE '")
                                             .append(word)
                                             .append("%'");
+                                    filterSavedSearchBy = 2;
                                     break;
                                 case 3:
                                     wordQueryBuilder.append(Book.KEY_NAME)
                                             .append(" LIKE '%")
                                             .append(word)
                                             .append("'");
+                                    filterSavedSearchBy = 3;
                                     break;
                                 default:
                                     break;
                             }
                             selectionBuilder.append(new String(wordQueryBuilder));
+                        } else {
+                            filterSavedSearch = "";
                         }
 
-                        if (radioGroupPeriod.getCheckedRadioButtonId() == R.id.radioButtonPeriodBy) {
-                            if (checkBoxPeriodFrom.isChecked()) {
+                        if (mRadioGroupPeriod.getCheckedRadioButtonId() == R.id.radioButtonPeriodBy) {
+                            if (mCheckBoxPeriodFrom.isChecked()) {
                                 Date startDate;
-                                String periodFrom = buttonPeriodFrom.getText().toString();
+                                String periodFrom = mButtonPeriodFrom.getText().toString();
+                                filterSavedPeriodFrom = periodFrom;
                                 SimpleDateFormat baseFormat = new SimpleDateFormat("yyyy'年'MM'月'dd'日'");
                                 try {
                                     startDate = baseFormat.parse(periodFrom);
@@ -374,10 +409,14 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
                                         .append(" >= ")
                                         .append(startDate.getTime());
                                 queryAppendChecker(selectionBuilder).append(periodFromQueryBuilder);
+                                filterSavedPeriodFromEnabled = true;
+                            } else {
+                                filterSavedPeriodFromEnabled = false;
                             }
-                            if (checkBoxPeriodTo.isChecked()) {
+                            if (mCheckBoxPeriodTo.isChecked()) {
                                 Date endDate;
-                                String periodTo = buttonPeriodTo.getText().toString();
+                                String periodTo = mButtonPeriodTo.getText().toString();
+                                filterSavedPeriodTo = periodTo;
                                 SimpleDateFormat baseFormat = new SimpleDateFormat("yyyy'年'MM'月'dd'日'");
                                 try {
                                     endDate = baseFormat.parse(periodTo);
@@ -388,36 +427,54 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
                                         .append(" < ")
                                         .append(endDate.getTime() + 86400000);
                                 queryAppendChecker(selectionBuilder).append(periodFromQueryBuilder);
+                                filterSavedPeriodToEnabled = true;
+                            } else {
+                                filterSavedPeriodToEnabled = false;
                             }
+                            filterSavedPeriodEnabled = true;
+                        } else {
+                            filterSavedPeriodEnabled = false;
                         }
 
-                        if (spinnerClass.getSelectedItemPosition() != 0) {
+                        String itemClass;
+                        if (mSpinnerClass.getSelectedItemPosition() != 0) {
+                            itemClass = mSpinnerClass.getSelectedItem().toString();
                             StringBuilder classQueryBuilder = new StringBuilder(Book.KEY_CLASS_NAME)
                                     .append(" == '")
-                                    .append(spinnerClass.getSelectedItem().toString())
+                                    .append(itemClass)
                                     .append("'");
                             queryAppendChecker(selectionBuilder).append(classQueryBuilder);
+                        } else {
+                            itemClass = mSpinnerClass.getItemAtPosition(0).toString();
                         }
+                        filterSavedClass = itemClass;
 
-                        if (radioGroupProtected.getCheckedRadioButtonId() != R.id.radioButtonProtectNone) {
+                        if (mRadioGroupProtected.getCheckedRadioButtonId() != R.id.radioButtonProtectNone) {
                             StringBuilder protectedQueryBuilder = new StringBuilder(Book.KEY_CONFIDENTIAL);
-                            if (radioGroupProtected.getCheckedRadioButtonId() == R.id.radioButtonProtected) {
+                            if (mRadioGroupProtected.getCheckedRadioButtonId() == R.id.radioButtonProtected) {
                                 protectedQueryBuilder.append(" == 'true'");
+                                filterSavedProtected = 1;
                             } else {
                                 protectedQueryBuilder.append(" == 'false'");
+                                filterSavedProtected = 2;
                             }
                             queryAppendChecker(selectionBuilder).append(protectedQueryBuilder);
+                        } else {
+                            filterSavedProtected = 0;
                         }
 
-                        if (radioGroupCached.getCheckedRadioButtonId() != R.id.radioButtonCachedNone &&
-                                radioButtonCached.isEnabled()) {
+                        if (mRadioGroupCached.getCheckedRadioButtonId() != R.id.radioButtonCachedNone) {
                             StringBuilder cachedQueryBuilder = new StringBuilder(Book.KEY_CACHED);
-                            if (radioGroupCached.getCheckedRadioButtonId() == R.id.radioButtonCached) {
+                            if (mRadioGroupCached.getCheckedRadioButtonId() == R.id.radioButtonCached) {
                                 cachedQueryBuilder.append(" == 'true'");
+                                filterSavedCached = 1;
                             } else {
                                 cachedQueryBuilder.append(" == 'false'");
+                                filterSavedCached = 2;
                             }
                             queryAppendChecker(selectionBuilder).append(cachedQueryBuilder);
+                        } else {
+                            filterSavedCached = 0;
                         }
 
                         Bundle args = new Bundle(1);
@@ -430,9 +487,50 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
                     }
                 }).create();
         mFilterDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        mFilterDialog.show();
     }
 
+    private void onRestoreFilterState() {
+        mRadioGroupPeriod.clearCheck();
+        if (filterSavedPeriodEnabled) {
+            mRadioButtonPeriodBy.setChecked(true);
+        } else {
+            mRadioButtonPeriodNone.setChecked(true);
+        }
+        mCheckBoxPeriodFrom.setChecked(filterSavedPeriodFromEnabled);
+        mCheckBoxPeriodTo.setChecked(filterSavedPeriodToEnabled);
+        if (filterSavedPeriodFrom.length() != 0) mButtonPeriodFrom.setText(filterSavedPeriodFrom);
+        if (filterSavedPeriodTo.length() != 0) mButtonPeriodTo.setText(filterSavedPeriodTo);
+
+        int position = 0;
+        for (int i = 0; i < mSpinnerClass.getCount(); i++) {
+            if (filterSavedClass.equals(mSpinnerClass.getItemAtPosition(i).toString())) {
+                position = i;
+                break;
+            }
+        }
+        mSpinnerClass.setSelection(position);
+
+        if (filterSavedSearch.length() != 0) mEditTextSearch.setText(filterSavedSearch);
+        mSpinnerSearchBy.setSelection(filterSavedSearchBy);
+
+        mRadioGroupProtected.clearCheck();
+        switch (filterSavedProtected) {
+            case 0: mRadioButtonProtectNone.setChecked(true); break;
+            case 1: mRadioButtonProtected.setChecked(true); break;
+            case 2: mRadioButtonNoneProtected.setChecked(true); break;
+            default: break;
+        }
+
+        if (loginMode != Const.LOGIN_MODE_OFFLINE) {
+            mRadioGroupCached.clearCheck();
+            switch (filterSavedCached) {
+                case 0: mRadioButtonCachedNone.setChecked(true); break;
+                case 1: mRadioButtonCached.setChecked(true); break;
+                case 2: mRadioButtonNoneCached.setChecked(true); break;
+                default: break;
+            }
+        }
+    }
 
     private StringBuilder queryAppendChecker(StringBuilder builder) {
         if (builder.length() != 0) {
