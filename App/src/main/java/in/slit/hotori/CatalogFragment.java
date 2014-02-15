@@ -4,14 +4,14 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+import android.os.PowerManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -50,6 +50,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class CatalogFragment extends Fragment implements SearchView.OnQueryTextListener {
+    private ActionBar mActionBar;
     private ListView mListView;
     private BookAdapter mAdapter;
     private Filter mFilter;
@@ -58,9 +59,9 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
     private String mFileTitle;
     private String mFilePath;
 
-    private AlertDialog mFilterDialog;
-    private ProgressDialog mProgressDialogCatalogLoading;
-    private ProgressDialog mProgressDialogDocumentDownloading;
+    private static AlertDialog mFilterDialog;
+    private static ProgressDialog mProgressDialogCatalogLoading;
+    private static ProgressDialog mProgressDialogDocumentDownloading;
 
     private View mDialogView;
     private RadioGroup mRadioGroupPeriod;
@@ -137,19 +138,21 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
 
         createProgresDialog();
         createFilterDialog();
 
-        getActivity().getSupportLoaderManager().initLoader(0, null, mCursorLoaderCallbacks);
-        getActivity().getSupportLoaderManager().initLoader(0, null, mBooleanLoaderCallbacks);
-        getActivity().getSupportLoaderManager().initLoader(0, null, mStringLoaderCallbacks);
+        mActionBar = ((MainActivity) getActivity()).getSupportActionBar();
+        drawActionBarBackground();
 
         if (mAdapter == null) {
             mAdapter = new BookAdapter(getActivity(), null, false);
+
+            getActivity().getSupportLoaderManager().initLoader(0, null, mCursorLoaderCallbacks);
+            getActivity().getSupportLoaderManager().initLoader(0, null, mBooleanLoaderCallbacks);
+            getActivity().getSupportLoaderManager().initLoader(0, null, mStringLoaderCallbacks);
+
             if (loginMode == Const.LOGIN_MODE_ONLINE) {
-                actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.actionbar_bg_online)));
                 StringBuilder url = new StringBuilder(Const.DEFAULT_CATALOG_URI)
                         .append("?token=")
                         .append(getAccessToken());
@@ -157,13 +160,11 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
                 args.putString(Const.BUNDLE_URI, new String(url));
                 mProgressDialogCatalogLoading.show();
                 getActivity().getSupportLoaderManager().restartLoader(Const.LOADER_RAW, args, mStringLoaderCallbacks);
-            } else {
-                actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.actionbar_bg_offline)));
             }
         }
         getActivity().getSupportLoaderManager().restartLoader(Const.LOADER_CURSOR, null, mCursorLoaderCallbacks);
-        mListView.setTextFilterEnabled(true);
 
+        mListView.setTextFilterEnabled(true);
         mAdapter.setFilterQueryProvider(new FilterQueryProvider() {
             @Override
             public Cursor runQuery(CharSequence constraint) {
@@ -234,6 +235,14 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
             mFilter.filter(queryText);
         }
         return true;
+    }
+
+    private void drawActionBarBackground() {
+        if (loginMode == Const.LOGIN_MODE_ONLINE) {
+            mActionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.actionbar_bg_online)));
+        } else {
+            mActionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.actionbar_bg_offline)));
+        }
     }
 
     private void createProgresDialog() {
@@ -419,11 +428,11 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
                             filterSavedSearch = "";
                         }
 
+                        String periodFrom = mButtonPeriodFrom.getText().toString();
+                        String periodTo = mButtonPeriodTo.getText().toString();
                         if (mRadioGroupPeriod.getCheckedRadioButtonId() == R.id.radioButtonPeriodBy) {
                             if (mCheckBoxPeriodFrom.isChecked()) {
                                 Date startDate;
-                                String periodFrom = mButtonPeriodFrom.getText().toString();
-                                filterSavedPeriodFrom = periodFrom;
                                 SimpleDateFormat baseFormat = new SimpleDateFormat("yyyy'年'MM'月'dd'日'");
                                 try {
                                     startDate = baseFormat.parse(periodFrom);
@@ -440,8 +449,6 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
                             }
                             if (mCheckBoxPeriodTo.isChecked()) {
                                 Date endDate;
-                                String periodTo = mButtonPeriodTo.getText().toString();
-                                filterSavedPeriodTo = periodTo;
                                 SimpleDateFormat baseFormat = new SimpleDateFormat("yyyy'年'MM'月'dd'日'");
                                 try {
                                     endDate = baseFormat.parse(periodTo);
@@ -460,8 +467,10 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
                         } else {
                             filterSavedPeriodEnabled = false;
                         }
+                        filterSavedPeriodFrom = periodFrom;
+                        filterSavedPeriodTo = periodTo;
 
-                        String itemClass;
+                        String itemClass = null;
                         if (mSpinnerClass.getSelectedItemPosition() != 0) {
                             itemClass = mSpinnerClass.getSelectedItem().toString();
                             StringBuilder classQueryBuilder = new StringBuilder(Book.KEY_CLASS_NAME)
@@ -609,50 +618,63 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
             args.putString(Const.BUNDLE_URI, new String(uri));
             args.putString(Const.BUNDLE_FILENAME, name);
             args.putInt(Const.BUNDLE_FILESIZE, size);
-//            getActivity().getSupportLoaderManager().restartLoader(Const.LOADER_BINARY, args, mBooleanLoaderCallbacks);
 
             mAsyncGetBinary = new AsyncGetBinary(getActivity(), new AsyncCallback() {
-                    ProgressDialog dialog;
-                    @Override
-                    public void onPreExecute() {
-                        dialog = new ProgressDialog(getActivity());
-                        dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                        dialog.setMessage(getString(R.string.downloading_book));
-//                        dialog.setMax(size);
-                        dialog.setIndeterminate(true);
-                        dialog.setCancelable(true);
-                        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.stop), new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                mAsyncGetBinary.cancel(true);
-                                dialog.cancel();
-                            }
-                        });
-                        dialog.show();
-                    }
-                    @Override
-                    public void onProgressUpdate(int progress) {
-                        dialog.incrementProgressBy(progress);
-                    }
-                    @Override
-                    public void onPostExecute(Object result) {
-                        dialog.dismiss();
-                        if (Boolean.parseBoolean(result.toString())) {
-                            ContentValues values = new ContentValues();
-                            values.put(Book.KEY_CACHED, "true");
-                            Uri bookUri = Uri.withAppendedPath(Book.CONTENT_URI, String.valueOf(mID));
-                            getActivity().getContentResolver().update(bookUri, values, null, null);
-                            openPDF(mFilePath, mFileTitle);
-                        } else {
-                            Toast.makeText(getActivity(), R.string.download_failure_please_try_again_later,
-                                    Toast.LENGTH_LONG).show();
+                PowerManager.WakeLock wakeLock;
+                ProgressDialog progressDialog;
+                @Override
+                public void onPreExecute() {
+                    PowerManager powerManager = (PowerManager) getActivity().getSystemService(Context.POWER_SERVICE);
+                    wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+                            getClass().getName());
+                    wakeLock.acquire();
+                    progressDialog = new ProgressDialog(getActivity());
+                    progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                    progressDialog.setMessage(getString(R.string.downloading_book));
+                    progressDialog.setMax(size / 1024);
+                    progressDialog.setProgressNumberFormat("%1d / %2d KB");
+                    progressDialog.setIndeterminate(true);
+                    progressDialog.setCancelable(true);
+                    progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.stop), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            mAsyncGetBinary.cancel(true);
                         }
+                    });
+                    progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                        @Override
+                        public void onCancel(DialogInterface dialogInterface) {
+                            mAsyncGetBinary.cancel(true);
+                        }
+                    });
+                    progressDialog.show();
+                }
+                @Override
+                public void onProgressUpdate(int progress) {
+                    progressDialog.setIndeterminate(false);
+                    progressDialog.setProgress(progress);
+                }
+                @Override
+                public void onPostExecute(boolean hasCompleted) {
+                    wakeLock.release();
+                    progressDialog.dismiss();
+                    if (hasCompleted) {
+                        ContentValues values = new ContentValues();
+                        values.put(Book.KEY_CACHED, "true");
+                        Uri bookUri = Uri.withAppendedPath(Book.CONTENT_URI, String.valueOf(mID));
+                        getActivity().getContentResolver().update(bookUri, values, null, null);
+                        openPDF(mFilePath, mFileTitle);
+                    } else {
+                        Toast.makeText(getActivity(), R.string.download_failure_please_try_again_later,
+                                Toast.LENGTH_LONG).show();
                     }
-                    @Override
-                    public void onCancelled() {
-                        Log.d(getTag(), "PDF file download canceled.");
-                    }
-                }, args);
+                }
+                @Override
+                public void onCancelled() {
+                    Log.d(getTag(), "PDF file download canceled.");
+                    progressDialog.dismiss();
+                }
+            }, args);
             mAsyncGetBinary.execute(null);
         }
     }

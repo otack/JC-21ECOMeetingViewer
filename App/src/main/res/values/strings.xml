@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">JC-21 ECO Meeting Viewer</string>
+    <string name="app_name">電子メディアマネージャー for JC-21</string>
     <string name="dummy">DUMMY</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -26,6 +26,7 @@
     <string name="is_not_input">が入力されていません。</string>
     <string name="login_failure_please_check_login_uri">ログインに失敗しました。ネットワークの状態またはログインURIをもう一度確認してください。</string>
     <string name="login_failure_please_check_id_pass">ログインに失敗しました。ID・パスワードをもう一度確認してください。</string>
+    <string name="please_login_once_before_use_offline_mode">オフラインモードを利用するには、一度以上ログインする必要があります。</string>
 
     <string name="filter_search">絞り込み検索</string>
     <string name="search_by_string">文字列</string>
@@ -67,22 +68,22 @@
 
     <!-- MuPDF Resources -->
     <string name="version">1.3 (git build)</string>
-    <string name="accept">承諾する</string>
+    <string name="accept">承諾</string>
     <string name="cannot_open_buffer">バッファーを開けません</string>
     <string name="cannot_open_document">ドキュメントを開けません</string>
-    <string name="cannot_open_document_Reason">次のドキュメントを開けません:%1$s</string>
+    <string name="cannot_open_document_Reason">次のドキュメントを開けません: %1$s</string>
     <string name="cannot_open_file_Path">次のファイルを開けません: %1$s</string>
-    <string name="choose_value">バリューを選択してください</string>
+    <string name="choose_value">文字列を選択してください</string>
     <string name="copied_to_clipboard">クリップボードにコピーしました</string>
     <string name="copy">コピー</string>
     <string name="copy_text">テキストをコピー</string>
     <string name="copy_text_to_the_clipboard">テキストをクリップボードにコピー</string>
     <string name="delete">削除</string>
     <string name="dismiss">閉じる</string>
-    <string name="document_has_changes_save_them_">ドキュメントは変更されました。保存しますか？</string>
+    <string name="document_has_changes_save_them_">ドキュメントは変更されています。保存しますか？</string>
     <string name="draw_annotation">注釈を挿入</string>
     <string name="edit_annotations">注釈を編集</string>
-    <string name="enter_password">パスワードを入力する</string>
+    <string name="enter_password">パスワードを入力</string>
     <string name="entering_reflow_mode">リフローモードを開始</string>
     <string name="leaving_reflow_mode">リフローモードを終了</string>
     <string name="entering_link_mode">リンクを有効化</string>
@@ -93,13 +94,13 @@
     <string name="ink">インク</string>
     <string name="more">もっと</string>
     <string name="no">いいえ</string>
-    <string name="no_further_occurrences_found">他にオカレンスは見つかりませんでした</string>
-    <string name="no_media_hint">記憶媒体をPCと共有するとアクセスできなくなる可能性があります</string>
-    <string name="no_media_warning">記憶媒体が見つかりません</string>
+    <string name="no_further_occurrences_found">他に文字列は見つかりませんでした</string>
+    <string name="no_media_hint">ストレージをPCと共有するとアクセスできなくなる可能性があります</string>
+    <string name="no_media_warning">ストレージが見つかりません</string>
     <string name="no_text_selected">テキストが選択されていません</string>
     <string name="not_supported">サポートされていません</string>
     <string name="nothing_to_save">保存するものがありません</string>
-    <string name="okay">了解</string>
+    <string name="okay">OK</string>
     <string name="outline_title">目次</string>
     <string name="parent_directory">[一つ上位のレベル]</string>
     <string name="picker_title_App_Ver_Dir">%1$s %2$s: %3$s</string>

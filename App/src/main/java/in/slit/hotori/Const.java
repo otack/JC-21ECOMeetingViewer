@@ -38,6 +38,8 @@ public class Const {
 
     public static final String NULL = "null";
 
+    public static final String TEMPFILE_NAME_APPEND = ".partial";
+
 //    public static final String DB_NAME = "app.db";
 //    public static final String DB_CATALOG_TABLE_NAME = "books";
 

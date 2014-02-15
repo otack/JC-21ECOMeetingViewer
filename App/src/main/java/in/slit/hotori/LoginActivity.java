@@ -100,6 +100,8 @@ public class LoginActivity extends FragmentActivity
                 onOfflineLoginPressed();
             }
         });
+
+        mSetUri.setVisibility(View.INVISIBLE);
     }
 
     private Bundle formChecker() {
@@ -163,11 +165,14 @@ public class LoginActivity extends FragmentActivity
     }
 
     private void onOfflineLoginPressed() {
-        Bundle args1 = formChecker();
-        if (args1 != null) {
-            Bundle args2 = LoginUtils.loadLoginInfo(getApplicationContext());
-            if (args1.getString("id").equals(args2.getString("id")) &&
-                    args1.getString("pass").equals(args2.getString("pass"))) {
+        Bundle forms = formChecker();
+        Bundle args = LoginUtils.loadLoginInfo(getApplicationContext());
+        if (forms != null) {
+            if (args == null) {
+                Toast.makeText(this, R.string.please_login_once_before_use_offline_mode,
+                        Toast.LENGTH_LONG).show();
+            } else if (forms.getString(Const.BUNDLE_ID).equals(args.getString(Const.BUNDLE_ID)) &&
+                    forms.getString(Const.BUNDLE_PASS).equals(args.getString(Const.BUNDLE_PASS))) {
                 setResult(Const.LOGIN_MODE_OFFLINE);
                 finish();
             } else {
