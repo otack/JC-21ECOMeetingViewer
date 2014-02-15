@@ -43,10 +43,10 @@ android {
 //    tasks.withType(Compile) { compileTask -> compileTask.dependsOn copyNativeLibs }
 
 
-//    tasks.withType(com.android.build.gradle.tasks.PackageApplication) { pkgTask ->
-//        pkgTask.jniFolders = new HashSet<File>()
-//        pkgTask.jniFolders.add(new File(projectDir, 'libs'))
-//    }
+    tasks.withType(com.android.build.gradle.tasks.PackageApplication) { pkgTask ->
+        pkgTask.jniFolders = new HashSet<File>()
+        pkgTask.jniFolders.add(new File(projectDir, 'libs'))
+    }
 
 
 //    clean.dependsOn 'cleanCopyNativeLibs'

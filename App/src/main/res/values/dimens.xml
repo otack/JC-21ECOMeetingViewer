@@ -27,7 +27,6 @@
     <dimen name="dialog_indent">8dp</dimen>
     <dimen name="dialog_category_margin">16dp</dimen>
     <dimen name="dialog_filter_period_text_top_margin">8sp</dimen>
-    <dimen name="dialog_filter_period_text_width">32sp</dimen>
 
     <!-- Login buttons -->
     <dimen name="btn_padding">14dp</dimen>

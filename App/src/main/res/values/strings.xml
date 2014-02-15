@@ -8,6 +8,7 @@
     <string name="run">実行</string>
     <string name="ok">OK</string>
     <string name="cancel">キャンセル</string>
+    <string name="stop">中止</string>
     <string name="reset_uri">初期値に戻す</string>
 
     <string name="ic_file"></string>
@@ -44,6 +45,7 @@
     <string name="cached_state">ダウンロード状態</string>
     <string name="not_specified">指定しない</string>
 
+    <string name="loading">読み込み中</string>
     <string name="downloading_catalog">カタログをダウンロード中…</string>
     <string name="updating_databases">データベースを更新中…</string>
     <string name="loading_catalog">カタログを読み込み中…</string>

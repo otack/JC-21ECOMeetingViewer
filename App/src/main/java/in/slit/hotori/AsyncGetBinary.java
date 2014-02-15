@@ -2,7 +2,6 @@ package in.slit.hotori;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.content.AsyncTaskLoader;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -15,16 +14,16 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
-public class BinaryLoader extends AsyncLoader<Boolean> {
+public class AsyncGetBinary extends AsyncCore {
     private Bundle mArgs;
 
-    public BinaryLoader(Context context, Bundle args) {
-        super(context);
+    public AsyncGetBinary(Context context, AsyncCallback asyncCallback, Bundle args) {
+        super(context, asyncCallback);
         mArgs = args;
     }
 
     @Override
-    public Boolean loadInBackground() {
+    protected Boolean doInBackground(String... params) {
         HttpClient httpClient = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(mArgs.getString(Const.BUNDLE_URI));
         try {
@@ -46,7 +45,6 @@ public class BinaryLoader extends AsyncLoader<Boolean> {
                 return true;
             }
         } catch (Exception e) {
-            return null;
         }
         return null;
     }

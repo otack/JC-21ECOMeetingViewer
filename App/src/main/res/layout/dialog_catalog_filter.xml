@@ -49,31 +49,30 @@
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:id="@+id/checkBoxPeriodFrom"
                 android:layout_alignTop="@+id/buttonPeriodFrom"
-                android:layout_alignBottom="@+id/buttonPeriodFrom" />
+                android:layout_alignBottom="@+id/buttonPeriodFrom"
+                android:text=""
+                android:id="@+id/checkBoxPeriodFrom" />
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:id="@+id/checkBoxPeriodTo"
                 android:layout_alignTop="@+id/buttonPeriodTo"
                 android:layout_alignBottom="@+id/buttonPeriodTo"
-                android:layout_alignParentLeft="true" />
+                android:layout_alignParentLeft="true"
+                android:text=""
+                android:id="@+id/checkBoxPeriodTo" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/buttonPeriodFrom"
-                android:layout_alignBottom="@+id/buttonPeriodFrom"
-                android:paddingTop="@dimen/dialog_filter_period_text_top_margin"
+                android:layout_alignTop="@id/buttonPeriodFrom"
+                android:layout_alignBottom="@id/buttonPeriodFrom"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/filter_period_from"
-                android:id="@+id/textViewPeriodFrom"
-                android:gravity="center_vertical" />
+                android:gravity="center_vertical"
+                android:id="@+id/textViewPeriodFrom" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -81,7 +80,6 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignTop="@+id/buttonPeriodTo"
                 android:layout_alignBottom="@+id/buttonPeriodTo"
-                android:paddingTop="@dimen/dialog_filter_period_text_top_margin"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/filter_period_to"
                 android:id="@+id/textViewPeriodTo"
@@ -90,17 +88,17 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/textViewPeriodFrom"
-                android:layout_toRightOf="@+id/checkBoxPeriodFrom"
+                android:layout_toLeftOf="@id/textViewPeriodFrom"
+                android:layout_toRightOf="@id/checkBoxPeriodFrom"
                 android:text="@string/dummy"
                 android:id="@+id/buttonPeriodFrom" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/textViewPeriodTo"
-                android:layout_toRightOf="@+id/checkBoxPeriodTo"
-                android:layout_below="@+id/buttonPeriodFrom"
+                android:layout_toLeftOf="@id/textViewPeriodTo"
+                android:layout_toRightOf="@id/checkBoxPeriodTo"
+                android:layout_below="@id/buttonPeriodFrom"
                 android:text="@string/dummy"
                 android:id="@+id/buttonPeriodTo" />
         </RelativeLayout>
@@ -142,7 +140,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_toLeftOf="@+id/spinnerSearchBy"
+                android:layout_toLeftOf="@id/spinnerSearchBy"
+                android:layout_alignBottom="@id/spinnerSearchBy"
                 android:singleLine="true"
                 android:id="@+id/editTextSearch" />
 
