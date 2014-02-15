@@ -46,7 +46,7 @@ public class StoreCatalogLoader extends AsyncLoader<Boolean> {
                     Date date;
                     String dateValue = xmlPullParser.getAttributeValue(null, "moddate");
                     StringBuilder builder = new StringBuilder(dateValue).delete(23, 29);
-                    SimpleDateFormat baseFormat = new SimpleDateFormat("yyyy-MM-dd'T'H:m:s.S");
+                    SimpleDateFormat baseFormat = new SimpleDateFormat(Const.BASE_DATE_FORMAT);
                     try {
                         date = baseFormat.parse(new String(builder));
                     } catch (ParseException ex) {

@@ -36,20 +36,6 @@ android {
             proguardFile 'proguard-rules.txt'
         }
     }
-//    task copyNativeLibs(type: Copy) {
-//        from('libs') { include '**/*.so' }
-//        into new File(buildDir, 'native-libs')
-//    }
-//    tasks.withType(Compile) { compileTask -> compileTask.dependsOn copyNativeLibs }
-
-
-    tasks.withType(com.android.build.gradle.tasks.PackageApplication) { pkgTask ->
-        pkgTask.jniFolders = new HashSet<File>()
-        pkgTask.jniFolders.add(new File(projectDir, 'libs'))
-    }
-
-
-//    clean.dependsOn 'cleanCopyNativeLibs'
 }
 
 dependencies {

@@ -52,7 +52,7 @@ public class BookAdapter extends CursorAdapter implements Filterable {
         String name = cursor.getString(cursor
                 .getColumnIndexOrThrow(Book.KEY_NAME));
 
-        CharSequence date = DateFormat.format("yyyy'年'MM'月'dd'日'",
+        CharSequence date = DateFormat.format(Const.DEFAULT_DATE_FORMAT,
                 cursor.getLong(cursor.getColumnIndex(Book.KEY_MODDATE)));
 
         String confidential;

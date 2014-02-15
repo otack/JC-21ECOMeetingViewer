@@ -40,6 +40,9 @@ public class Const {
 
     public static final String TEMPFILE_NAME_APPEND = ".partial";
 
+    public static final String BASE_DATE_FORMAT = "yyyy-MM-dd'T'H:m:s.S";
+    public static final String DEFAULT_DATE_FORMAT = "yyyy'年'MM'月'dd'日'";
+
 //    public static final String DB_NAME = "app.db";
 //    public static final String DB_CATALOG_TABLE_NAME = "books";
 

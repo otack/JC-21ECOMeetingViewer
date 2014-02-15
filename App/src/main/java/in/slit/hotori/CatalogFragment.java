@@ -59,9 +59,10 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
     private String mFileTitle;
     private String mFilePath;
 
+    int mLoginMode;
+
     private static AlertDialog mFilterDialog;
     private static ProgressDialog mProgressDialogCatalogLoading;
-    private static ProgressDialog mProgressDialogDocumentDownloading;
 
     private View mDialogView;
     private RadioGroup mRadioGroupPeriod;
@@ -101,12 +102,9 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
     private int filterSavedProtected = 0;
     private int filterSavedCached = 0;
 
-    int loginMode;
-
     private final String defOrder = "`" + Book.KEY_MODDATE + "` DESC";
     private final String offlineSelection = "`" + Book.KEY_CACHED + "` == 'true'";
     private final String searchSelection = "`" + Book.KEY_NAME + "` LIKE ?";
-    private final String searchClassSelection = "`" + Book.KEY_CLASS_NAME + "` LIKE ?";
 
     CursorLoaderCallbacks mCursorLoaderCallbacks = new CursorLoaderCallbacks();
     BooleanLoaderCallbacks mBooleanLoaderCallbacks = new BooleanLoaderCallbacks();
@@ -114,9 +112,9 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
 
     AsyncGetBinary mAsyncGetBinary;
 
-    public CatalogFragment(int mode) {
-        loginMode = mode;
-        Log.d("Login Mode: ", String.valueOf(loginMode));
+    public CatalogFragment(int i) {
+        mLoginMode = i;
+        Log.d("Login Mode: ", String.valueOf(mLoginMode));
         setRetainInstance(true);
         setHasOptionsMenu(true);
     }
@@ -152,7 +150,7 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
             getActivity().getSupportLoaderManager().initLoader(0, null, mBooleanLoaderCallbacks);
             getActivity().getSupportLoaderManager().initLoader(0, null, mStringLoaderCallbacks);
 
-            if (loginMode == Const.LOGIN_MODE_ONLINE) {
+            if (mLoginMode == Const.LOGIN_MODE_ONLINE) {
                 StringBuilder url = new StringBuilder(Const.DEFAULT_CATALOG_URI)
                         .append("?token=")
                         .append(getAccessToken());
@@ -170,7 +168,7 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
             public Cursor runQuery(CharSequence constraint) {
                 String word = "%" + constraint.toString() + "%";
                 StringBuilder selection = new StringBuilder(searchSelection);
-                if (loginMode == Const.LOGIN_MODE_OFFLINE) {
+                if (mLoginMode == Const.LOGIN_MODE_OFFLINE) {
                     selection.append(" AND ").append(offlineSelection);
                 }
                 return getActivity().getContentResolver().query(
@@ -238,7 +236,7 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
     }
 
     private void drawActionBarBackground() {
-        if (loginMode == Const.LOGIN_MODE_ONLINE) {
+        if (mLoginMode == Const.LOGIN_MODE_ONLINE) {
             mActionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.actionbar_bg_online)));
         } else {
             mActionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.actionbar_bg_offline)));
@@ -249,17 +247,6 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
         mProgressDialogCatalogLoading = new ProgressDialog(getActivity());
         mProgressDialogCatalogLoading.setMessage(getString(R.string.loading_catalog));
         mProgressDialogCatalogLoading.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-
-        mProgressDialogDocumentDownloading = new ProgressDialog(getActivity());
-        mProgressDialogDocumentDownloading.setMessage(getString(R.string.downloading_book));
-        mProgressDialogDocumentDownloading.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mProgressDialogDocumentDownloading.setCancelable(true);
-        mProgressDialogDocumentDownloading.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialogInterface) {
-                ;
-            }
-        });
     }
 
     private void createFilterDialog() {
@@ -347,7 +334,7 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
                 .appendQueryParameter("distinct", "true")
                 .build();
         String selection = null;
-        if (loginMode == Const.LOGIN_MODE_OFFLINE) {
+        if (mLoginMode == Const.LOGIN_MODE_OFFLINE) {
             selection = offlineSelection;
         }
         Cursor cursor = getActivity().getContentResolver().query(
@@ -373,7 +360,7 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
         adapterSearchBy.add(getString(R.string.end_with));
         mSpinnerSearchBy.setAdapter(adapterSearchBy);
 
-        if (loginMode == Const.LOGIN_MODE_OFFLINE) {
+        if (mLoginMode == Const.LOGIN_MODE_OFFLINE) {
             mRadioGroupCached.clearCheck();
             mRadioGroupCached.check(R.id.radioButtonCached);
             mRadioButtonCachedNone.setEnabled(false);
@@ -433,7 +420,7 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
                         if (mRadioGroupPeriod.getCheckedRadioButtonId() == R.id.radioButtonPeriodBy) {
                             if (mCheckBoxPeriodFrom.isChecked()) {
                                 Date startDate;
-                                SimpleDateFormat baseFormat = new SimpleDateFormat("yyyy'年'MM'月'dd'日'");
+                                SimpleDateFormat baseFormat = new SimpleDateFormat(Const.DEFAULT_DATE_FORMAT);
                                 try {
                                     startDate = baseFormat.parse(periodFrom);
                                 } catch (ParseException ex) {
@@ -443,13 +430,10 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
                                         .append(" >= ")
                                         .append(startDate.getTime());
                                 queryAppendChecker(selectionBuilder).append(periodFromQueryBuilder);
-                                filterSavedPeriodFromEnabled = true;
-                            } else {
-                                filterSavedPeriodFromEnabled = false;
                             }
                             if (mCheckBoxPeriodTo.isChecked()) {
                                 Date endDate;
-                                SimpleDateFormat baseFormat = new SimpleDateFormat("yyyy'年'MM'月'dd'日'");
+                                SimpleDateFormat baseFormat = new SimpleDateFormat(Const.DEFAULT_DATE_FORMAT);
                                 try {
                                     endDate = baseFormat.parse(periodTo);
                                 } catch (ParseException ex) {
@@ -459,18 +443,25 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
                                         .append(" < ")
                                         .append(endDate.getTime() + 86400000);
                                 queryAppendChecker(selectionBuilder).append(periodFromQueryBuilder);
-                                filterSavedPeriodToEnabled = true;
-                            } else {
-                                filterSavedPeriodToEnabled = false;
                             }
                             filterSavedPeriodEnabled = true;
                         } else {
                             filterSavedPeriodEnabled = false;
                         }
+                        if (mCheckBoxPeriodFrom.isChecked()) {
+                            filterSavedPeriodFromEnabled = true;
+                        } else {
+                            filterSavedPeriodFromEnabled = false;
+                        }
+                        if (mCheckBoxPeriodTo.isChecked()) {
+                            filterSavedPeriodToEnabled = true;
+                        } else {
+                            filterSavedPeriodToEnabled = false;
+                        }
                         filterSavedPeriodFrom = periodFrom;
                         filterSavedPeriodTo = periodTo;
 
-                        String itemClass = null;
+                        String itemClass;
                         if (mSpinnerClass.getSelectedItemPosition() != 0) {
                             itemClass = mSpinnerClass.getSelectedItem().toString();
                             StringBuilder classQueryBuilder = new StringBuilder(Book.KEY_CLASS_NAME)
@@ -555,7 +546,7 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
             default: break;
         }
 
-        if (loginMode != Const.LOGIN_MODE_OFFLINE) {
+        if (mLoginMode != Const.LOGIN_MODE_OFFLINE) {
             mRadioGroupCached.clearCheck();
             switch (filterSavedCached) {
                 case 0: mRadioButtonCachedNone.setChecked(true); break;
@@ -672,6 +663,7 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
                 @Override
                 public void onCancelled() {
                     Log.d(getTag(), "PDF file download canceled.");
+                    wakeLock.release();
                     progressDialog.dismiss();
                 }
             }, args);
@@ -709,7 +701,7 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
                         selectionBuilder.append(bundle.getString("selection"));
 //                        order = bundle.getString("order");
                     }
-                    if (loginMode == Const.LOGIN_MODE_OFFLINE) {
+                    if (mLoginMode == Const.LOGIN_MODE_OFFLINE) {
                         queryAppendChecker(selectionBuilder).append(offlineSelection);
                     }
                     return new CursorLoader(getActivity(), Book.CONTENT_URI, null, new String(selectionBuilder), null, order);
@@ -742,17 +734,16 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
             return null;
         }
         @Override
-        public void onLoadFinished(Loader<Boolean> booleanLoader, Boolean b) {
+        public void onLoadFinished(Loader<Boolean> booleanLoader, Boolean isCompleted) {
             if (booleanLoader instanceof StoreCatalogLoader) {
-                if (b) {
+                if (isCompleted) {
                     mProgressDialogCatalogLoading.dismiss();
                     getActivity().getSupportLoaderManager().restartLoader(Const.LOADER_CURSOR, null, mCursorLoaderCallbacks);
                 } else {
                     Log.d(getTag(), "Catalog XML download failed.");
                 }
             } else {
-                if (b) {
-                    mProgressDialogDocumentDownloading.dismiss();
+                if (isCompleted) {
                     ContentValues values = new ContentValues();
                     values.put(Book.KEY_CACHED, "true");
                     Uri bookUri = Uri.withAppendedPath(Book.CONTENT_URI, String.valueOf(mID));
@@ -780,10 +771,10 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
             return null;
         }
         @Override
-        public void onLoadFinished(Loader<String> stringLoader, String s) {
-            if (!TextUtils.isEmpty(s)) {
+        public void onLoadFinished(Loader<String> stringLoader, String data) {
+            if (!TextUtils.isEmpty(data)) {
                 Bundle args = new Bundle(1);
-                args.putString(Const.BUNDLE_RAW, s);
+                args.putString(Const.BUNDLE_RAW, data);
                 getActivity().getSupportLoaderManager().restartLoader(Const.LOADER_STORE_CATALOG, args, mBooleanLoaderCallbacks);
             } else {
                 Log.d(getTag(), "Catalog XML store failed.");

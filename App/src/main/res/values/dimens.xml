@@ -22,6 +22,7 @@
     <dimen name="catalog_left_margin">7dp</dimen>
     <dimen name="catalog_right_margin">14dp</dimen>
     <dimen name="catalog_vertical_padding">10dp</dimen>
+    <dimen name="catalog_divider_height">1dp</dimen>
 
     <!-- Catalog filter dialog layout -->
     <dimen name="dialog_indent">8dp</dimen>
