@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:color="@color/btn_login"
+        android:color="@color/btn_text_login_normal"
         android:state_window_focused="false"
         android:state_enabled="true" />
     <item
-        android:color="@color/btn_disabled"
+        android:color="@color/btn_text_normal_disable"
         android:state_window_focused="false"
         android:state_enabled="false" />
     <item
-        android:color="@color/btn_text"
+        android:color="@color/btn_text_login_pressed"
         android:state_pressed="true" />
     <item
-        android:color="@color/btn_text"
+        android:color="@color/btn_text_normal"
         android:state_focused="true"
         android:state_enabled="true" />
     <item
-        android:color="@color/btn_login"
+        android:color="@color/btn_text_login_normal"
         android:state_enabled="true" />
     <item
-        android:color="@color/btn_text"
+        android:color="@color/btn_text_normal"
         android:state_focused="true" />
     <item
-        android:color="@color/btn_disabled" />
+        android:color="@color/btn_text_normal_disable" />
 </selector>

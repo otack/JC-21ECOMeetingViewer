@@ -5,5 +5,5 @@
     <corners
         android:radius="@dimen/btn_radius" />
     <solid
-        android:color="@color/btn_disabled" />
+        android:color="@color/btn_text_normal_disable" />
 </shape>

@@ -23,15 +23,15 @@
                 android:radius="@dimen/btn_radius" />
             <gradient
                 android:angle="90"
-                android:endColor="@color/btn_bg_gradient_top"
-                android:startColor="@color/btn_bg_gradient_bottom"
+                android:endColor="@color/btn_bg_gradient_bottom"
+                android:startColor="@color/btn_bg_gradient_bottom_2"
                 android:type="linear" />
             <padding
                 android:top="@dimen/btn_padding"
                 android:bottom="@dimen/btn_padding" />
             <stroke
                 android:width="@dimen/btn_shadow_width"
-                android:color="@color/btn_shadow_dark" />
+                android:color="@color/btn_shadow_light" />
         </shape>
     </item>
 </layer-list>

@@ -11,11 +11,11 @@
         android:drawable="@drawable/btn_generic_normal_disable" />
     <item
         android:state_pressed="true"
-        android:drawable="@drawable/btn_login_pressed" />
+        android:drawable="@drawable/btn_generic_pressed" />
     <item
         android:state_focused="true"
         android:state_enabled="true"
-        android:drawable="@drawable/btn_login_pressed" />
+        android:drawable="@drawable/btn_generic_pressed" />
     <item
         android:state_enabled="true"
         android:drawable="@drawable/btn_generic_normal" />
