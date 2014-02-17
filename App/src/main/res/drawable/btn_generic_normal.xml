@@ -31,7 +31,7 @@
                 android:bottom="@dimen/btn_padding" />
             <stroke
                 android:width="@dimen/btn_shadow_width"
-                android:color="@color/btn_shadow_dark" />
+                android:color="@color/btn_shadow" />
         </shape>
     </item>
 </layer-list>

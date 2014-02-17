@@ -13,5 +13,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:dividerHeight="@dimen/catalog_divider_height"
-        android:divider="@color/catalog_bg" />
+        android:divider="@color/catalog_bg"
+        android:headerDividersEnabled="false"
+        android:footerDividersEnabled="false"
+        android:fadingEdgeLength="0dp" />
 </RelativeLayout>

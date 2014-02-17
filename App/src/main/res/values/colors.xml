@@ -20,7 +20,7 @@
     <color name="holo">#33b5e5</color>
 
     <color name="actionbar_bg_online">#a01e5a</color>
-    <color name="actionbar_bg_offline">#9a66ff</color>
+    <color name="actionbar_bg_offline">#6e3cc8</color>
 
     <!-- Login -->
     <color name="login_bg">#29232b</color>
@@ -32,24 +32,23 @@
     <color name="btn_bg_gradient_bottom">#272129</color>
     <color name="btn_bg_gradient_bottom_2">#29232b</color>
     <color name="btn_text_login_normal">#cc3d85</color>
-    <color name="btn_text_login_pressed">#992e64</color>
+    <color name="btn_text_login_pressed">#80335a</color>
     <color name="btn_text_offline_normal">#9a66ff</color>
-    <color name="btn_text_offline_pressed">#6a47b0</color>
+    <color name="btn_text_offline_pressed">#564080</color>
     <color name="btn_text_normal_disable">#4b414f</color>
     <color name="btn_text_normal">#252026</color>
-    <color name="btn_shadow_dark">#66251f26</color>
-    <color name="btn_shadow_light">#33251f26</color>
+    <color name="btn_shadow">#66251f26</color>
     <color name="btn_emboss_gradient_top">#272129</color>
     <color name="btn_emboss_gradient_bottom">#2c252e</color>
 
     <!-- Catalog -->
     <color name="catalog_bg">#252026</color>
     <color name="catalog_primary_text">#e4e3e4</color>
-    <color name="catalog_secondary_text">#4b414f</color>
-    <color name="catalog_active_text_1">#cc3d85</color>
-    <color name="catalog_active_text_2">#9a66ff</color>
+    <color name="catalog_secondary_text">#5f5564</color>
+    <color name="catalog_active_text_1">@color/btn_text_login_normal</color>
+    <color name="catalog_active_text_2">@color/btn_text_offline_normal</color>
 
     <color name="catalog_item_bg_normal">#2f2930</color>
-    <color name="catalog_item_bg_pressed">#39323b</color>
+    <color name="catalog_item_bg_pressed">#3e3640</color>
 
 </resources>

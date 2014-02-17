@@ -4,4 +4,11 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
     </style>
 
+    <!-- Clean theme for application launch. -->
+    <style name="AppThemeOnLaunch" parent="Theme.AppCompat">
+        <item name="background">@null</item>
+        <item name="android:background">@null</item>
+        <item name="actionBarStyle">@style/OnLaunchStyle</item>
+        <item name="android:actionBarStyle">@style/OnLaunchStyle</item>
+    </style>
 </resources>

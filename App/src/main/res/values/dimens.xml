@@ -12,7 +12,7 @@
     <dimen name="txt_catalog_book_3">13sp</dimen>
     <dimen name="txt_catalog_book_4">12sp</dimen>
     <dimen name="ic_catalog_book_1">18sp</dimen>
-    <dimen name="ic_catalog_book_2">16dp</dimen>
+    <dimen name="ic_catalog_book_2">16sp</dimen>
     <dimen name="ic_catalog_file">32sp</dimen>
     <dimen name="ic_catalog_adjust_1">4sp</dimen>
     <dimen name="ic_catalog_adjust_2">2sp</dimen>

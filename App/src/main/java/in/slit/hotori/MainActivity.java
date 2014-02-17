@@ -11,10 +11,10 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-//        setTheme(R.style.AppTheme);
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        getSupportActionBar().setIcon(R.drawable.ic_menu_logo);
 
         if (savedInstanceState == null) {
             SharedPreferences preferences = getSharedPreferences(Const.PREF_NAME, Context.MODE_PRIVATE);
@@ -40,6 +40,8 @@ public class MainActivity extends ActionBarActivity {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new CatalogFragment(resultCode))
                     .commit();
+        } else {
+            startActivityForResult(new Intent(this, LoginActivity.class), Const.LOGIN_MODE);
         }
     }
 }

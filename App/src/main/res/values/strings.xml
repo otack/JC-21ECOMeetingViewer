@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">電子メディアマネージャー for JC-21</string>
+    <string name="app_name">JC-21 ﾒﾃﾞｨｱﾏﾈｰｼﾞｬｰ</string>
+    <string name="app_name_short">JC-21</string>
     <string name="dummy">DUMMY</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -28,6 +29,9 @@
     <string name="login_failure_please_check_id_pass">ログインに失敗しました。ID・パスワードをもう一度確認してください。</string>
     <string name="please_login_once_before_use_offline_mode">オフラインモードを利用するには、一度以上ログインする必要があります。</string>
 
+    <string name="book_list">書籍一覧</string>
+    <string name="online_mode">オンラインモード</string>
+    <string name="offline_mode">オフラインモード</string>
     <string name="filter_search">絞り込み検索</string>
     <string name="search_by_string">文字列</string>
     <string name="contains">を含む</string>
@@ -80,7 +84,7 @@
     <string name="copy_text_to_the_clipboard">テキストをクリップボードにコピー</string>
     <string name="delete">削除</string>
     <string name="dismiss">閉じる</string>
-    <string name="document_has_changes_save_them_">ドキュメントは変更されています。保存しますか？</string>
+    <string name="document_has_changes_save_them_">変更が加えられています。保存しますか？</string>
     <string name="draw_annotation">注釈を挿入</string>
     <string name="edit_annotations">注釈を編集</string>
     <string name="enter_password">パスワードを入力</string>

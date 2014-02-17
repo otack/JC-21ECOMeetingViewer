@@ -53,34 +53,26 @@
             android:hint="@string/password"
             android:textColorHint="@color/text_field_hint" />
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
+        <Button
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp">
+            android:layout_marginTop="24dp"
+            android:text="@string/login"
+            android:id="@+id/buttonLogin"
+            android:layout_gravity="center_horizontal"
+            android:textSize="17sp"
+            android:textColor="@color/btn_login_text"
+            android:background="@drawable/btn_generic" />
 
-            <Button
-                android:layout_width="160dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="0dp"
-                android:text="@string/login_offline"
-                android:id="@+id/buttonOffline"
-                android:textSize="17sp"
-                android:textColor="@color/btn_offline_text"
-                android:background="@drawable/btn_generic" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/login_offline"
+            android:id="@+id/buttonOffline"
+            android:textSize="17sp"
+            android:textColor="@color/btn_offline_text"
+            android:background="@drawable/btn_generic" />
 
-            <Button
-                android:layout_width="160dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="0dp"
-                android:text="@string/login"
-                android:id="@+id/buttonLogin"
-                android:layout_gravity="center_horizontal"
-                android:textSize="17sp"
-                android:textColor="@color/btn_login_text"
-                android:background="@drawable/btn_generic" />
-
-        </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

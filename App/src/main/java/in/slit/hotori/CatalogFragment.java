@@ -137,11 +137,14 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        createProgresDialog();
+        createProgressDialog();
         createFilterDialog();
 
         mActionBar = ((MainActivity) getActivity()).getSupportActionBar();
+        mActionBar.setTitle(R.string.book_list);
+        mActionBar.setHomeButtonEnabled(true);
         drawActionBarBackground();
+        setActionBarTitleCurrentMode();
 
         if (mAdapter == null) {
             mAdapter = new BookAdapter(getActivity(), null, false);
@@ -208,12 +211,16 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home:
+                startActivity(new Intent(getActivity(), MainActivity.class));
+                getActivity().finish();
+                return true;
             case R.id.action_filter:
                 onRestoreFilterState();
                 mFilterDialog.show();
                 return true;
-            case R.id.action_sort:
-                return true;
+//            case R.id.action_sort:
+//                return true;
             default:
                 break;
         }
@@ -243,7 +250,15 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
         }
     }
 
-    private void createProgresDialog() {
+    private void setActionBarTitleCurrentMode() {
+        if (mLoginMode == Const.LOGIN_MODE_ONLINE) {
+            mActionBar.setSubtitle(R.string.online_mode);
+        } else {
+            mActionBar.setSubtitle(R.string.offline_mode);
+        }
+    }
+
+    private void createProgressDialog() {
         mProgressDialogCatalogLoading = new ProgressDialog(getActivity());
         mProgressDialogCatalogLoading.setMessage(getString(R.string.loading_catalog));
         mProgressDialogCatalogLoading.setProgressStyle(ProgressDialog.STYLE_SPINNER);
