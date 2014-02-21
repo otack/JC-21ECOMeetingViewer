@@ -143,6 +143,7 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
         mActionBar = ((MainActivity) getActivity()).getSupportActionBar();
         mActionBar.setTitle(R.string.book_list);
         mActionBar.setHomeButtonEnabled(true);
+        mActionBar.setDisplayHomeAsUpEnabled(true);
         drawActionBarBackground();
         setActionBarTitleCurrentMode();
 

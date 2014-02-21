@@ -38,7 +38,8 @@
             android:textColor="@color/text_field"
             android:background="@drawable/edit_text_login"
             android:hint="@string/id"
-            android:textColorHint="@color/text_field_hint" />
+            android:textColorHint="@color/text_field_hint"
+            android:textCursorDrawable="@null" />
 
         <EditText
             android:layout_width="match_parent"
@@ -51,7 +52,8 @@
             android:textColor="@color/text_field"
             android:background="@drawable/edit_text_login"
             android:hint="@string/password"
-            android:textColorHint="@color/text_field_hint" />
+            android:textColorHint="@color/text_field_hint"
+            android:textCursorDrawable="@null" />
 
         <Button
             android:layout_width="match_parent"
