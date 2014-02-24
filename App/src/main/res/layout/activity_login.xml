@@ -62,7 +62,7 @@
             android:text="@string/login"
             android:id="@+id/buttonLogin"
             android:layout_gravity="center_horizontal"
-            android:textSize="17sp"
+            android:textSize="@dimen/btn_text"
             android:textColor="@color/btn_login_text"
             android:background="@drawable/btn_generic" />
 
@@ -72,7 +72,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/login_offline"
             android:id="@+id/buttonOffline"
-            android:textSize="17sp"
+            android:textSize="@dimen/btn_text"
             android:textColor="@color/btn_offline_text"
             android:background="@drawable/btn_generic" />
 

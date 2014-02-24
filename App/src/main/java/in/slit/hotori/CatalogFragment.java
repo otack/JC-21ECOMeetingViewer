@@ -263,6 +263,7 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
         mProgressDialogCatalogLoading = new ProgressDialog(getActivity());
         mProgressDialogCatalogLoading.setMessage(getString(R.string.loading_catalog));
         mProgressDialogCatalogLoading.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialogCatalogLoading.setCanceledOnTouchOutside(false);
     }
 
     private void createFilterDialog() {
@@ -638,19 +639,13 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
                     progressDialog = new ProgressDialog(getActivity());
                     progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                     progressDialog.setMessage(getString(R.string.downloading_book));
+                    progressDialog.setCanceledOnTouchOutside(false);
                     progressDialog.setMax(size / 1024);
                     progressDialog.setProgressNumberFormat("%1d / %2d KB");
-                    progressDialog.setIndeterminate(true);
-                    progressDialog.setCancelable(true);
-                    progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.stop), new DialogInterface.OnClickListener() {
+                    progressDialog.setIndeterminate(false);
+                    progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            mAsyncGetBinary.cancel(true);
-                        }
-                    });
-                    progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                        @Override
-                        public void onCancel(DialogInterface dialogInterface) {
                             mAsyncGetBinary.cancel(true);
                         }
                     });
@@ -658,7 +653,6 @@ public class CatalogFragment extends Fragment implements SearchView.OnQueryTextL
                 }
                 @Override
                 public void onProgressUpdate(int progress) {
-                    progressDialog.setIndeterminate(false);
                     progressDialog.setProgress(progress);
                 }
                 @Override
